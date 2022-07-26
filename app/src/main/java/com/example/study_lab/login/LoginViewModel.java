@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.study_lab.Result;
+import com.example.study_lab.model.Result;
 import com.example.study_lab.UserRepository;
 
 import java.util.List;

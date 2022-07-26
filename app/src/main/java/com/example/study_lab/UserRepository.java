@@ -1,6 +1,7 @@
 package com.example.study_lab;
 
 import com.example.study_lab.datasource.DataSource;
+import com.example.study_lab.model.Result;
 
 public class UserRepository {
     private static volatile UserRepository INSTANCE = new UserRepository();

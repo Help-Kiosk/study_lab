@@ -1,4 +1,4 @@
-package com.example.study_lab;
+package com.example.study_lab.model;
 
 public class Result<T> {
     private Result() {
