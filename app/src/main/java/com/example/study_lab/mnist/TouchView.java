@@ -1,4 +1,4 @@
-package com.example.study_lab;
+package com.example.study_lab.mnist;
 
 import android.content.Context;
 import android.graphics.Bitmap;
