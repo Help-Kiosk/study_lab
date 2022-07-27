@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "640677193868",
+    "project_id": "studylab-72f62",
+    "storage_bucket": "studylab-72f62.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:640677193868:android:c9cf7008cc93b9e37cf3a9",
+        "android_client_info": {
+          "package_name": "com.example.study_lab"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "640677193868-fpn595ole8ntt5qvujenal53dpp2r006.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADVSuus9huQ-rHsGB4gzImHm6vL-v3HBI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "640677193868-fpn595ole8ntt5qvujenal53dpp2r006.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

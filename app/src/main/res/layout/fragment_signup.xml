@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".login.SignupFragment">
+
+        <TextView
+            android:id="@+id/signup_tv_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/signup_et_email"
+            app:layout_constraintStart_toStartOf="@+id/signup_et_email" />
+
+        <EditText
+            android:id="@+id/signup_et_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="88dp"
+            android:ems="15"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:minHeight="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/signup_tv_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Password"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/signup_et_password"
+            app:layout_constraintStart_toStartOf="@+id/signup_et_password" />
+
+        <EditText
+            android:id="@+id/signup_et_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="15"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:minHeight="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signup_et_email" />
+
+        <TextView
+            android:id="@+id/signup_tv_passwordCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PasswordCheck"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/signup_et_passwordCheck"
+            app:layout_constraintStart_toStartOf="@+id/signup_et_passwordCheck" />
+
+        <EditText
+            android:id="@+id/signup_et_passwordCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="15"
+            android:hint="PasswordCheck"
+            android:inputType="textPassword"
+            android:minHeight="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signup_et_password" />
+
+        <TextView
+            android:id="@+id/signup_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/signup_et_displayName"
+            app:layout_constraintStart_toStartOf="@+id/signup_et_displayName" />
+
+        <EditText
+            android:id="@+id/signup_et_displayName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="15"
+            android:hint="Name"
+            android:inputType="textPersonName"
+            android:minHeight="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signup_et_passwordCheck" />
+
+        <TextView
+            android:id="@+id/signup_tv_phonenum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="phone number"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@+id/signup_et_phonenum"
+            app:layout_constraintStart_toStartOf="@+id/signup_et_phonenum" />
+
+        <EditText
+            android:id="@+id/signup_et_phonenum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:ems="15"
+            android:hint="010-0000-0000"
+            android:inputType="phone"
+            android:minHeight="50dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signup_et_displayName" />
+
+        <Button
+            android:id="@+id/signup_bt_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Signup"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/signup_et_phonenum" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

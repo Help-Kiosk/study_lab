@@ -4,6 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.13339328537170264" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/study_lab/app/src/main/res/layout/activity_main.xml" value="0.3104166666666667" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/study_lab/app/src/main/res/layout/fragment_daily_challenge.xml" value="0.5421195652173914" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/study_lab/app/src/main/res/layout/fragment_login.xml" value="0.5348958333333333" />
+        <entry key="..\:/Users/ADMIN/AndroidStudioProjects/study_lab/app/src/main/res/layout/fragment_signup.xml" value="0.4" />
         <entry key="app/src/main/res/drawable-v24/shape_rect_border.xml" value="0.1245" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_daily_challenge.xml" value="0.297469482421875" />
