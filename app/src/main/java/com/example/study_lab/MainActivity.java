@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.IBinder;
 
 import com.example.study_lab.datasource.FirebaseDataSource;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
