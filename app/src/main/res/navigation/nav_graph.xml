@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_qrImageFragment"
+            app:destination="@id/qrImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -23,4 +26,9 @@
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/qrImageFragment"
+        android:name="com.example.study_lab.QrImageFragment"
+        android:label="fragment_qrimage"
+        tools:layout="@layout/fragment_qrimage" />
 </navigation>
