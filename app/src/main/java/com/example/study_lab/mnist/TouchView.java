@@ -118,4 +118,11 @@ public class TouchView extends View {
         path.reset();
     }
 
+    public void clear(){
+        path.reset();
+        drawingBitmap = Bitmap.createBitmap(drawingBitmap.getWidth(), drawingBitmap.getHeight(), Bitmap.Config.ARGB_8888);
+        drawingCanvas = new Canvas(drawingBitmap);
+        invalidate();
+    }
+
 }
