@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.study_lab.model.Result;
 import com.example.study_lab.UserRepository;
+import com.example.study_lab.model.User;
 
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,6 +19,7 @@ public class LoginViewModel extends ViewModel {
     private final MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>(new LoginFormState(null,null,false));
     private MutableLiveData<Boolean> doingWork = new MutableLiveData<>(false);
     private MutableLiveData<Boolean> loggedIn = new MutableLiveData<>();
+    private MutableLiveData<Boolean> addUserSuccess = new MutableLiveData<>(false);
 
     private String idText = "";
     private String passwordText = "";
@@ -180,6 +182,17 @@ public class LoginViewModel extends ViewModel {
         return !(displayName.length() < 2);
     }
 
+    public void createQrForUser(User toCreate){
+        userRepository.createQrForUser(toCreate, result->{
+           if(result instanceof Result.Success){
+               addUserSuccess.postValue(true);
+           } else{
+               addUserSuccess.postValue(false);
+           }
+        });
+    }
+
+
     public LiveData<Boolean> registerSuccess() {
         return registerSuccess;
     }
@@ -202,6 +215,10 @@ public class LoginViewModel extends ViewModel {
 
     public LiveData<Boolean> isLoggedIn() {
         return loggedIn;
+    }
+
+    public LiveData<Boolean> addUserSuccess() {
+        return addUserSuccess;
     }
 
 }

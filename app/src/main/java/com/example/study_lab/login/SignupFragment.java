@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.study_lab.R;
+import com.example.study_lab.model.User;
 
 public class SignupFragment extends Fragment {
 
@@ -29,6 +30,8 @@ public class SignupFragment extends Fragment {
     private EditText et_displayName;
     private EditText et_phoneNum;
     private Button bt_signup;
+
+    private User user;
 
     public SignupFragment() {
     }
@@ -83,9 +86,10 @@ public class SignupFragment extends Fragment {
             @Override
             public void onChanged(Boolean isRegistrationSuccessful) {
                 if (isRegistrationSuccessful) {
-                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show();
-                    NavHostFragment.findNavController(SignupFragment.this).navigateUp();
-                    loginViewModel.setRegisterSuccess(false);
+                    loginViewModel.createQrForUser(user);
+//                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show();
+//                    NavHostFragment.findNavController(SignupFragment.this).navigateUp();
+//                    loginViewModel.setRegisterSuccess(false);
                 } else {
                     Toast.makeText(requireContext(), "fail", Toast.LENGTH_SHORT).show();
                     et_email.setText("");
@@ -168,6 +172,7 @@ public class SignupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (loginViewModel.checkId(et_email.getText().toString())) {
+                    user = new User(et_displayName.getText().toString(),et_email.getText().toString(),et_password.getText().toString(),et_phoneNum.getText().toString());
                     loginViewModel.tryRegister(et_email.getText().toString(), et_password.getText().toString(), et_displayName.getText().toString(),et_phoneNum.getText().toString());
                 } else {
                     Toast.makeText(requireContext(), "Email already exists", Toast.LENGTH_SHORT).show();
