@@ -76,35 +76,25 @@ public class FileService extends Service {
         });
     }
 
-    public void getImageDrawable(String filePath, FileServiceCallback<Result<Drawable>> callback)
-    {
+    public void getImageDrawable(String filePath, FileServiceCallback<Result<Drawable>> callback) {
         executor.execute(() ->
         {
             File file = new File(imageStorageDir, filePath);
-            if(file.exists())
-            {
+            if (file.exists()) {
                 Drawable d = Drawable.createFromPath(file.getAbsolutePath());
                 callback.onComplete(new Result.Success<Drawable>(d));
-            }
-            else
-            {
-                try
-                {
+            } else {
+                try {
                     file.getParentFile().mkdirs();
                     file.createNewFile();
-                    firebaseDataSource.downloadFile(filePath, file, new DataSourceCallback<Result>()
-                    {
+                    firebaseDataSource.downloadFile(filePath, file, new DataSourceCallback<Result>() {
                         @Override
-                        public void onComplete(Result result)
-                        {
-                            if(result instanceof Result.Success)
-                            {
+                        public void onComplete(Result result) {
+                            if (result instanceof Result.Success) {
                                 Log.d("DEBUG", "FileService : getImageDrawable() : " + filePath + " was downloaded");
                                 File toReturn = ((Result.Success<File>) result).getData();
                                 callback.onComplete(new Result.Success<Drawable>(Drawable.createFromPath(toReturn.getAbsolutePath())));
-                            }
-                            else
-                            {
+                            } else {
                                 Log.d("DEBUG", "FileService : getImageDrawable() : " + filePath + " failed to download");
                                 Log.d("DEBUG", ((Result.Error) result).getError().getMessage());
                                 file.delete();
@@ -112,9 +102,7 @@ public class FileService extends Service {
                             }
                         }
                     });
-                }
-                catch(IOException e)
-                {
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
@@ -124,24 +112,21 @@ public class FileService extends Service {
     public File createImageFile(String destination) {
         return createFile(imageStorageDir, destination);
     }
-    public void  uploadFileToDatabase(File toSave, String destination, FileServiceCallback<Result<Uri>> callback)
-    {
-        firebaseDataSource.uploadFile(toSave, destination, new DataSourceCallback<Result<Uri>>(){
+
+    public void uploadFileToDatabase(File toSave, String destination, FileServiceCallback<Result<Uri>> callback) {
+        firebaseDataSource.uploadFile(toSave, destination, new DataSourceCallback<Result<Uri>>() {
             @Override
-            public void onComplete(Result result)
-            {
+            public void onComplete(Result result) {
                 callback.onComplete(result);
             }
         });
     }
 
-    public void setFirebaseDataSource(FirebaseDataSource fds)
-    {
+    public void setFirebaseDataSource(FirebaseDataSource fds) {
         this.firebaseDataSource = fds;
     }
 
-    public void setExecutor(Executor e)
-    {
+    public void setExecutor(Executor e) {
         executor = e;
     }
 

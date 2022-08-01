@@ -24,8 +24,6 @@ public class UserRepository {
     private DataSource dataSource;
     private FileService fileService;
     protected Executor executor;
-
-
     private Map<String, Drawable> userQrDrawableMap = new HashMap<String, Drawable>();
     private Map<String,User> userMap = new HashMap<>();
 
@@ -51,20 +49,20 @@ public class UserRepository {
         loggedInUserId = userId;
     }
 
-    public void createQrForUser(final User toAdd, UserRepositoryCallback<Result> callback){
-        generateUserQr(toAdd, new UserRepositoryCallback<Result>() {
+    public void createQrForUser(final User toAdd, UserRepositoryCallback<Result<Uri>> callback){
+        generateUserQr(toAdd, new UserRepositoryCallback<Result<Uri>>() {
             @Override
             public void onComplete(Result result) {
                 callback.onComplete(result);
             }
         });
     }
-    private void generateUserQr(User user, UserRepositoryCallback<Result> callback) {
+    private void generateUserQr(User user, UserRepositoryCallback<Result<Uri>> callback) {
         executor.execute(new Runnable() {
             @Override
             public void run() {
-                String toEncode = "gausslab.study_lab.user_" + user.getUserId();
-                generateUserQr_helper(toEncode, App.getWorksiteQrImagePath(user.getUserId()), new UserRepositoryCallback<Result>() {
+                String toEncode = "studylab.study_lab.user_" + user.getUserId();
+                generateUserQr_helper(toEncode, App.getWorksiteQrImagePath(user.getUserId()), new UserRepositoryCallback<Result<Uri>>() {
                     @Override
                     public void onComplete(Result result) {
                         callback.onComplete(result);
@@ -74,7 +72,7 @@ public class UserRepository {
         });
     }
 
-    private void generateUserQr_helper(String toEncode, String localDestinationPath, UserRepositoryCallback<Result> callback) {
+    private void generateUserQr_helper(String toEncode, String localDestinationPath, UserRepositoryCallback<Result<Uri>> callback) {
         QRCodeWriter writer = new QRCodeWriter();
         try {
             BitMatrix bitMatrix = writer.encode(toEncode, BarcodeFormat.QR_CODE, 512, 512);

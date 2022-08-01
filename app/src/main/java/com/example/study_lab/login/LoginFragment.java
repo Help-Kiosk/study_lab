@@ -104,7 +104,10 @@ public class LoginFragment extends Fragment {
             @Override
             public void onChanged(Boolean isLoggedIn) {
                 if (isLoggedIn == true) {
-                    NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_qrImageFragment);
+                    LoginFragmentDirections.ActionLoginFragmentToQrImageFragment action = LoginFragmentDirections.actionLoginFragmentToQrImageFragment();
+                    action.setUserName(et_email.getText().toString());
+                    NavHostFragment.findNavController(LoginFragment.this).navigate(action);
+                    //NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_qrImageFragment);
                     loginViewModel.setUserId(et_email.getText().toString());
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();

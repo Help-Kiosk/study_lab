@@ -28,7 +28,13 @@
     </fragment>
     <fragment
         android:id="@+id/qrImageFragment"
-        android:name="com.example.study_lab.QrImageFragment"
+        android:name="com.example.study_lab.QrImage.QrImageFragment"
         android:label="fragment_qrimage"
-        tools:layout="@layout/fragment_qrimage" />
+        tools:layout="@layout/fragment_qrimage" >
+        <argument
+            android:name="userName"
+            app:argType="string"
+            android:defaultValue="userName" />
+    </fragment>
+
 </navigation>

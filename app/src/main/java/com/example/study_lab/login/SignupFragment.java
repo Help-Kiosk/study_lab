@@ -87,13 +87,15 @@ public class SignupFragment extends Fragment {
             public void onChanged(Boolean isRegistrationSuccessful) {
                 if (isRegistrationSuccessful) {
                     loginViewModel.createQrForUser(user);
-//                    Toast.makeText(requireContext(), "Success", Toast.LENGTH_SHORT).show();
-//                    NavHostFragment.findNavController(SignupFragment.this).navigateUp();
-//                    loginViewModel.setRegisterSuccess(false);
-                } else {
-                    Toast.makeText(requireContext(), "fail", Toast.LENGTH_SHORT).show();
-                    et_email.setText("");
-                    et_password.setText("");
+                }
+            }
+        });
+
+        loginViewModel.addUserSuccess().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isAdditionSuccessful) {
+                if(isAdditionSuccessful){
+                    NavHostFragment.findNavController(SignupFragment.this).navigate(R.id.action_signupFragment_to_loginFragment);
                 }
             }
         });
