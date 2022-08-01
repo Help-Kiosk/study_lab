@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="정답 번호를 입력해주세요."
+        android:text="정답을 그려주세요."
         android:textSize="20dp"
         style="@style/ResultText" />
     <TextView
@@ -39,22 +39,22 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btn_detect"
+            android:id="@+id/btn_clear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginRight="10dp"
             android:backgroundTint="@color/blue"
-            android:text="정답 확인"/>
+            android:text="지우기"/>
 
         <Button
-            android:id="@+id/btn_clear"
+            android:id="@+id/btn_detect"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_marginLeft="10dp"
             android:backgroundTint="@color/blue"
-            android:text="다시 입력"/>
+            android:text="정답 입력"/>
 
     </LinearLayout>
 
