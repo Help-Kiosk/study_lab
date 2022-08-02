@@ -12,6 +12,8 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_daily_challenge.xml" value="0.297469482421875" />
         <entry key="app/src/main/res/layout/fragment_mnist.xml" value="0.3692708333333333" />
+        <entry key="app/src/main/res/layout/fragment_qrcodeimage.xml" value="0.2994791666666667" />
+        <entry key="app/src/main/res/layout/fragment_qrimage.xml" value="0.5317708333333333" />
       </map>
     </option>
   </component>

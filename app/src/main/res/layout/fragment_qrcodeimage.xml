@@ -5,13 +5,13 @@
     android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QrImageFragment" >
+    tools:context=".QrCodeImageFragment" >
 
     <ImageView
-        android:id="@+id/qrimage_iv_qr"
-        android:layout_width="290dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="32dp"
+        android:id="@+id/qrcode_iv_qrcode"
+        android:layout_width="268dp"
+        android:layout_height="265dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

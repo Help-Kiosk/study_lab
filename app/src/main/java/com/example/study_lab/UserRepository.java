@@ -117,7 +117,7 @@ public class UserRepository {
         return userQrDrawableMap.get(userId);
     }
 
-    public void loadQrDrawableForWorksite(String userId, UserRepositoryCallback<Result<Drawable>> callback) {
+    public void loadQrDrawableForUser(String userId, UserRepositoryCallback<Result<Drawable>> callback) {
         fileService.getImageDrawable(App.getWorksiteQrImagePath(userId), new FileService.FileServiceCallback<Result<Drawable>>() {
             @Override
             public void onComplete(Result result) {

@@ -99,13 +99,14 @@ public class LoginFragment extends Fragment {
         });
 
 
-
         loginViewModel.isLoggedIn().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isLoggedIn) {
                 if (isLoggedIn == true) {
-                    NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_qrImageFragment);
                     loginViewModel.setUserId(et_email.getText().toString());
+                    LoginFragmentDirections.ActionLoginFragmentToQrCodeImageFragment action = LoginFragmentDirections.actionLoginFragmentToQrCodeImageFragment();
+                    action.setUserId(et_email.getText().toString());
+                    NavHostFragment.findNavController(LoginFragment.this).navigate(action);
                 } else {
                     Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
                     et_email.setText(null);
@@ -161,7 +162,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_signupFragment);
-
             }
         });
         //endregion

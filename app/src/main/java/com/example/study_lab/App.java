@@ -10,6 +10,6 @@ public class App extends Application {
 
     public static String getWorksiteQrImagePath(String userId)
     {
-        return "worksiteQrImages/user_" + userId + ".jpg";
+        return "userQrImages/user_" + userId + ".jpg";
     }
 }
