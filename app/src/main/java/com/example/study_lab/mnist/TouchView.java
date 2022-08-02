@@ -20,7 +20,7 @@ public class TouchView extends View {
     private Paint drawingPaint = new Paint(Paint.DITHER_FLAG);
     private Bitmap drawingBitmap;
     private Canvas drawingCanvas;
-    private Paint pen = new Paint();
+    private Paint pen = new Paint(Paint.DITHER_FLAG);
 
     public TouchView(Context context, @Nullable AttributeSet attrs){
         super(context, attrs);
@@ -28,6 +28,14 @@ public class TouchView extends View {
         drawingPaint.setAntiAlias(true);
         drawingPaint.setStrokeWidth(10f);
         drawingPaint.setStrokeJoin(Paint.Join.ROUND);
+
+        pen.setAntiAlias(true);
+        pen.setStrokeJoin(Paint.Join.ROUND);
+        pen.setColor(Color.BLACK);
+        pen.setStyle(Paint.Style.STROKE);
+        pen.setStrokeJoin(Paint.Join.ROUND);
+        pen.setStrokeCap(Paint.Cap.ROUND);
+        pen.setStrokeWidth(48f);
     }
 
     public Bitmap initBitmap(){

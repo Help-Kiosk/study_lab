@@ -1,5 +1,6 @@
 package com.example.study_lab.mnist;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.study_lab.R;
 
@@ -37,8 +39,7 @@ public class MnistFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        classifier = new Classifier(requireContext());
-
+        classifier = new Classifier(requireActivity());
     }
 
     @Override
@@ -56,14 +57,21 @@ public class MnistFragment extends Fragment {
         btn_clear = view.findViewById(R.id.btn_clear);
         btn_detect = view.findViewById(R.id.btn_detect);
 
-        btn_clear.setOnClickListener(new View.OnClickListener() {
+        btn_detect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (touchView == null){
+                    Toast.makeText(requireContext(), "숫자를 입력해주세요.", Toast.LENGTH_SHORT);
+                }
 
+                Bitmap bitmap = touchView.exportToBitmap(28, 28);
+                int output = classifier.classify(bitmap);
+
+                predict_text.setText(String.valueOf(output));
             }
         });
 
-        btn_detect.setOnClickListener(new View.OnClickListener() {
+        btn_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 touchView.clear();
@@ -72,4 +80,5 @@ public class MnistFragment extends Fragment {
         });
 
     }
+
 }
