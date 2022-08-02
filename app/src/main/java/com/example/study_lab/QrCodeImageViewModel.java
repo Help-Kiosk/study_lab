@@ -1,4 +1,4 @@
-package com.example.study_lab.QrImage;
+package com.example.study_lab;
 
 import android.graphics.drawable.Drawable;
 
@@ -6,25 +6,23 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.study_lab.UserRepository;
 import com.example.study_lab.model.Result;
 import com.example.study_lab.model.User;
 
-public class QrImageViewModel extends ViewModel {
+public class QrCodeImageViewModel extends ViewModel {
     private UserRepository userRepository = UserRepository.getInstance();
     private MutableLiveData<Boolean> isQrLoaded = new MutableLiveData<>(false);
-    private Drawable qrImage;
+    private Drawable qrCodeImage;
 
     private User currUser;
 
-    public void setUser(String user) {
-        currUser = userRepository.getUser(user);
-
-        userRepository.loadQrDrawableForWorksite(user, new UserRepository.UserRepositoryCallback<Result<Drawable>>() {
+    public void setUser(String userId) {
+        currUser = userRepository.getUser(userId);
+        userRepository.loadQrDrawableForUser(userId, new UserRepository.UserRepositoryCallback<Result<Drawable>>() {
             @Override
             public void onComplete(Result<Drawable> drawableResult) {
                 if (drawableResult instanceof Result.Success) {
-                    qrImage = ((Result.Success<Drawable>) drawableResult).getData();
+                    qrCodeImage = ((Result.Success<Drawable>) drawableResult).getData();
                     isQrLoaded.postValue(true);
                 } else {
                     //오류 보여주기
@@ -37,8 +35,8 @@ public class QrImageViewModel extends ViewModel {
         return isQrLoaded;
     }
 
-    public Drawable getQrImage() {
-        return qrImage;
+    public Drawable getQrCodeImage() {
+        return qrCodeImage;
     }
 
     public User getCurrUser() {
