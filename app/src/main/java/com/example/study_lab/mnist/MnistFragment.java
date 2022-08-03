@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,12 @@ public class MnistFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        classifier = new Classifier(requireActivity());
+        try {
+            classifier = new Classifier(requireActivity());
+        } catch (IOException e) {
+            Toast.makeText(requireContext(), "fail to build classifier", Toast.LENGTH_SHORT).show();
+            Log.e("MnistFragment", "init(): Failed to create Classifier", e);
+        }
     }
 
     @Override
@@ -61,11 +67,11 @@ public class MnistFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (touchView == null){
-                    Toast.makeText(requireContext(), "숫자를 입력해주세요.", Toast.LENGTH_SHORT);
+                    Toast.makeText(requireContext(), "숫자를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 }
 
-                Bitmap bitmap = touchView.exportToBitmap(28, 28);
-                int output = classifier.classify(bitmap);
+                Bitmap image = touchView.exportToBitmap(28, 28);
+                int output = classifier.classify(image);
 
                 predict_text.setText(String.valueOf(output));
             }

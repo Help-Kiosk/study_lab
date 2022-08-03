@@ -1,15 +1,10 @@
 package com.example.study_lab.mnist;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
-import android.util.Log;
-
-import androidx.fragment.app.Fragment;
 
 import org.tensorflow.lite.Interpreter;
-import org.tensorflow.lite.support.common.FileUtil;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -21,22 +16,17 @@ import java.nio.channels.FileChannel;
 public class Classifier {
     private static final String LOG_TAG = Classifier.class.getSimpleName();
 
-    private Interpreter interpreter;
-    private Interpreter.Options options;
-    private ByteBuffer byteBuffer;
-    private float[][] outputBuffer = new float[1][10];
-    private int[] pixels = new int[28*28];
+    private final Interpreter interpreter;
+    private final Interpreter.Options options;
+    private final ByteBuffer byteBuffer;
+    private final float[][] outputBuffer = new float[1][10];
+    private final int[] pixels = new int[28*28];
 
-    public Classifier(Activity activity){
+    public Classifier(Activity activity) throws IOException {
         options = new Interpreter.Options();
 
-        try {
-            interpreter = new Interpreter(loadModelFile(activity), options);
-        }catch (IOException e){
-            Log.e(LOG_TAG, "Classifier: IOException "+e);
-        }
-
-        byteBuffer = ByteBuffer.allocate(4*28*28);
+        interpreter = new Interpreter(loadModelFile(activity), options);
+        byteBuffer = ByteBuffer.allocateDirect( 4 * 28 * 28 );
         byteBuffer.order(ByteOrder.nativeOrder());
     }
 
@@ -47,7 +37,7 @@ public class Classifier {
     }
 
     private MappedByteBuffer loadModelFile(Activity activity) throws IOException {
-        AssetFileDescriptor fileDescriptor = activity.getAssets().openFd("mnist.tflite");
+        AssetFileDescriptor fileDescriptor = activity.getAssets().openFd( "mnist.tflite");
         FileInputStream inputStream = new FileInputStream(fileDescriptor.getFileDescriptor());
         FileChannel fileChannel = inputStream.getChannel();
         long startOffset = fileDescriptor.getStartOffset();
@@ -62,21 +52,9 @@ public class Classifier {
         bitmap.getPixels(pixels, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight());
 
         int index =0;
-        for (int i =0;i<784;i++){
-            if (i==781){
-                Log.d("convert", "pixel: "+String.format("pixel : %d", index));
-            }
-            Log.d("convert", "pixel: "+String.format("pixel : %d", index));
+        for (int i =0;i<28*28;i++){
             byteBuffer.putFloat(convertPixel(pixels[index++]));
-            Log.d("convert", "convertBitmapToByteBuffer: "+String.format("%d %f  pixel : %d", i, convertPixel(pixels[index++]), index));
         }
-//        for (int i : new int[27]){
-//            for (int j : new int[27]){
-//                Log.d("convert", "pixel: "+String.format("pixel : %d", index));
-//                byteBuffer.putFloat(convertPixel(pixels[index++]));
-//                Log.d("convert", "convertBitmapToByteBuffer: "+String.format("%d %f  pixel : %d", i, convertPixel(pixels[index++]), index));
-//            }
-//        }
 
     }
 
