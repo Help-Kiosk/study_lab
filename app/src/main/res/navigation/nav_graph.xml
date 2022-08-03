@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/qrCodeImageFragment"
-        android:name="com.example.study_lab.QrCodeImageFragment"
+        android:name="com.example.study_lab.QrCodeImage.QrCodeImageFragment"
         android:label="QrImageFragment"
         tools:layout="@layout/fragment_qrcodeimage">
         <argument

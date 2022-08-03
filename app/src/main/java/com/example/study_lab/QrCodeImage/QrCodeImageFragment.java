@@ -1,4 +1,4 @@
-package com.example.study_lab;
+package com.example.study_lab.QrCodeImage;
 
 import android.os.Bundle;
 
