@@ -25,9 +25,8 @@ public class UserRepository {
     private FileService fileService;
     protected Executor executor;
 
-
     private Map<String, Drawable> userQrDrawableMap = new HashMap<String, Drawable>();
-    private Map<String,User> userMap = new HashMap<>();
+    private Map<String, User> userMap = new HashMap<>();
 
     private String loggedInUserId;
 
@@ -38,9 +37,23 @@ public class UserRepository {
     public void tryRegister(final String id, final String password, final String displayName, final String phoneNum, final String checkIn, UserRepositoryCallback<Result> callback) {
         dataSource.tryRegister(id, password, displayName, phoneNum, checkIn, callback::onComplete);
     }
-
+    
     public void getId(final UserRepositoryCallback<Result> callback) {
         dataSource.getId(callback::onComplete);
+    }
+
+    public User getUser(String userId) {
+        if (userMap.containsKey(userId))
+            return userMap.get(userId);
+        return null;
+    }
+
+    public void loadAnswer(UserRepositoryCallback<Result> callback) {
+        dataSource.loadAnswer(callback::onComplete);
+    }
+
+    public void tryRegister(final String id, final String password, final String displayName, final String phoneNum, UserRepositoryCallback<Result> callback) {
+        dataSource.tryRegister(id, password, displayName, phoneNum, callback::onComplete);
     }
 
     public void tryLogin(final String id, final String password, UserRepositoryCallback<Result> callback) {
@@ -51,7 +64,7 @@ public class UserRepository {
         loggedInUserId = userId;
     }
 
-    public void createQrForUser(final User toAdd, UserRepositoryCallback<Result> callback){
+    public void createQrForUser(final User toAdd, UserRepositoryCallback<Result> callback) {
         generateUserQr(toAdd, new UserRepositoryCallback<Result>() {
             @Override
             public void onComplete(Result result) {
@@ -59,6 +72,7 @@ public class UserRepository {
             }
         });
     }
+
     private void generateUserQr(User user, UserRepositoryCallback<Result> callback) {
         executor.execute(new Runnable() {
             @Override
@@ -107,16 +121,6 @@ public class UserRepository {
         }
     }
 
-    public User getUser(String userId) {
-        if (userMap.containsKey(userId))
-            return userMap.get(userId);
-        return null;
-    }
-
-    public Drawable getQrDrawable(String userId) {
-        return userQrDrawableMap.get(userId);
-    }
-
     public void loadQrDrawableForUser(String userId, UserRepositoryCallback<Result<Drawable>> callback) {
         fileService.getImageDrawable(App.getWorksiteQrImagePath(userId), new FileService.FileServiceCallback<Result<Drawable>>() {
             @Override
@@ -128,6 +132,10 @@ public class UserRepository {
                 callback.onComplete(result);
             }
         });
+    }
+
+    public Drawable getQrDrawable(String userId) {
+        return userQrDrawableMap.get(userId);
     }
 
     public void setExecutor(Executor exec) {

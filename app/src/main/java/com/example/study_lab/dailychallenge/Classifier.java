@@ -1,4 +1,4 @@
-package com.example.study_lab.mnist;
+package com.example.study_lab.dailychallenge;
 
 import android.app.Activity;
 import android.content.res.AssetFileDescriptor;

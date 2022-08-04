@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/loginFragment">
-
+    app:startDestination="@id/dailyChallengeFragment">
+    
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.example.study_lab.login.LoginFragment"
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/qrCodeImageFragment"
-        android:name="com.example.study_lab.QrCodeImage.QrCodeImageFragment"
+        android:name="com.example.study_lab.qrcodeimage.QrCodeImageFragment"
         android:label="QrImageFragment"
         tools:layout="@layout/fragment_qrcodeimage">
         <argument
@@ -38,9 +38,26 @@
             app:argType="string"/>
     </fragment>
     <fragment
-        android:id="@+id/mnistFragment"
-        android:name="com.example.study_lab.mnist.MnistFragment"
+        android:id="@+id/dailyChallengeFragment"
+        android:name="com.example.study_lab.dailychallenge.DailyChallengeFragment"
         android:label="fragment_mnist"
-        tools:layout="@layout/fragment_mnist" />
+        tools:layout="@layout/fragment_dailychallenge" >
+        <action
+            android:id="@+id/action_dailyChallengeFragment_to_correctFragment"
+            app:destination="@id/correctFragment" />
+        <action
+            android:id="@+id/action_dailyChallengeFragment_to_wrongFragment"
+            app:destination="@id/wrongFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/correctFragment"
+        android:name="com.example.study_lab.dailychallenge.CorrectFragment"
+        android:label="fragment_correct"
+        tools:layout="@layout/fragment_correct" />
+    <fragment
+        android:id="@+id/wrongFragment"
+        android:name="com.example.study_lab.dailychallenge.WrongFragment"
+        android:label="fragment_wrong"
+        tools:layout="@layout/fragment_wrong" />
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.example.study_lab.mnist;
+package com.example.study_lab.dailychallenge;
 
 import android.content.Context;
 import android.graphics.Bitmap;
