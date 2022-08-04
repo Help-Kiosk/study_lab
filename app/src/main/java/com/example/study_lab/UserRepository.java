@@ -48,6 +48,10 @@ public class UserRepository {
         dataSource.loadAnswer(callback::onComplete);
     }
 
+    public void loadQuestion(UserRepositoryCallback<Result> callback){
+        dataSource.loadQuestion(callback::onComplete);
+    }
+
     public void tryRegister(final String id, final String password, final String displayName, final String phoneNum, UserRepositoryCallback<Result> callback) {
         dataSource.tryRegister(id, password, displayName, phoneNum, callback::onComplete);
     }
@@ -74,7 +78,7 @@ public class UserRepository {
             @Override
             public void run() {
                 String toEncode = "gausslab.study_lab.user_" + user.getUserId();
-                generateUserQr_helper(toEncode, App.getWorksiteQrImagePath(user.getUserId()), new UserRepositoryCallback<Result>() {
+                generateUserQr_helper(toEncode, App.getQrImagePath(user.getUserId()), new UserRepositoryCallback<Result>() {
                     @Override
                     public void onComplete(Result result) {
                         callback.onComplete(result);
@@ -118,7 +122,7 @@ public class UserRepository {
     }
 
     public void loadQrDrawableForUser(String userId, UserRepositoryCallback<Result<Drawable>> callback) {
-        fileService.getImageDrawable(App.getWorksiteQrImagePath(userId), new FileService.FileServiceCallback<Result<Drawable>>() {
+        fileService.getImageDrawable(App.getQrImagePath(userId), new FileService.FileServiceCallback<Result<Drawable>>() {
             @Override
             public void onComplete(Result result) {
                 if (result instanceof Result.Success) {
