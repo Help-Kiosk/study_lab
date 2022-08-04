@@ -1,6 +1,7 @@
 package com.example.study_lab.dailychallenge;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,10 +16,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.study_lab.R;
+import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 
@@ -30,6 +34,7 @@ public class DailyChallengeFragment extends Fragment {
     private Button btn_clear;
     private Button btn_detect;
     private Button btn_submit;
+    private ImageView imageView;
     private int output;
 
     public DailyChallengeFragment() {
@@ -46,6 +51,7 @@ public class DailyChallengeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dailyChallengeViewModel = new ViewModelProvider(this).get(DailyChallengeViewModel.class);
+        dailyChallengeViewModel.loadQuestion();
 
         try {
             classifier = new Classifier(requireActivity());
@@ -70,6 +76,7 @@ public class DailyChallengeFragment extends Fragment {
         btn_clear = view.findViewById(R.id.daily_btn_clear);
         btn_detect = view.findViewById(R.id.daily_btn_detect);
         btn_submit = view.findViewById(R.id.daily_btn_submit);
+        imageView = view.findViewById(R.id.daily_imageView);
 
         btn_detect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,7 +113,7 @@ public class DailyChallengeFragment extends Fragment {
             }
         });
 
-        dailyChallengeViewModel.getLoadedData().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+        dailyChallengeViewModel.getDataLoaded().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 if (output==integer){
@@ -115,6 +122,17 @@ public class DailyChallengeFragment extends Fragment {
                 else {
                     NavHostFragment.findNavController(DailyChallengeFragment.this).navigate(R.id.action_dailyChallengeFragment_to_wrongFragment);
                 }
+            }
+        });
+
+        dailyChallengeViewModel.isUriLoaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                Task<Uri> pathUri = dailyChallengeViewModel.getUri();
+
+                Glide.with(requireContext())
+                        .load(pathUri.getResult())
+                        .into(imageView);
             }
         });
 
