@@ -1,4 +1,4 @@
-package com.example.study_lab.QrCodeImage;
+package com.example.study_lab.qrcodeimage;
 
 import android.os.Bundle;
 
@@ -24,8 +24,6 @@ public class QrCodeImageFragment extends Fragment {
     public QrCodeImageFragment() {
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +35,6 @@ public class QrCodeImageFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentQrcodeimageBinding.inflate(inflater, container, false);
         iv_qrCodeImage = binding.qrcodeIvQrcode;
-
         qrCodeImageViewModel.setUser(QrCodeImageFragmentArgs.fromBundle(getArguments()).getUserId());
         return binding.getRoot();
     }
