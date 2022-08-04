@@ -108,8 +108,8 @@ public class FirebaseDataSource implements DataSource {
         Log.d("DEBUG:DataSource", "uploadFile: " + toUpload.getName() + " to " + destination);
         Uri localFile = Uri.fromFile(toUpload);
         StorageReference storageReference = firebaseStorage.getReference().child(destination);
-        UploadTask uploadTask = storageReference.putFile(localFile);
-        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+
+        storageReference.putFile(localFile).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -136,6 +136,7 @@ public class FirebaseDataSource implements DataSource {
     public void downloadFile(String downloadPath, File localFile, DataSourceCallback<Result> callback) {
         Log.d("DEBUG:DataSource", "downloadFile: " + downloadPath);
         StorageReference ref = firebaseStorage.getReference().child(downloadPath);
+
         ref.getFile(localFile).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
@@ -148,17 +149,29 @@ public class FirebaseDataSource implements DataSource {
         });
     }
 
-    public void loadAnswer(DataSourceCallback<Result> callback){
+    public void loadAnswer(DataSourceCallback<Result> callback) {
         db.collection("answer")
                 .document("answer")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             DocumentSnapshot document = task.getResult();
                             callback.onComplete(new Result.Success<DocumentSnapshot>(document));
                         }
+                    }
+                });
+    }
+
+    public void loadQuestion(DataSourceCallback<Result> callback) {
+        StorageReference ref = firebaseStorage.getReference().child("problemImages");
+
+        ref.getDownloadUrl()
+                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        callback.onComplete(new Result.Success<Task>(task));
                     }
                 });
     }

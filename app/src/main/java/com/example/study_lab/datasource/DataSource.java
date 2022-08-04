@@ -10,4 +10,6 @@ public interface DataSource {
     void getId(DataSourceCallback<Result> callback);
 
     void loadAnswer(DataSourceCallback<Result> callback);
+
+    void loadQuestion(DataSourceCallback<Result> callback);
 }
