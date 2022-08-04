@@ -35,8 +35,8 @@ public class UserRepository {
         return INSTANCE;
     }
 
-    public void tryRegister(final String id, final String password, final String displayName, final String phoneNum, UserRepositoryCallback<Result> callback) {
-        dataSource.tryRegister(id, password, displayName, phoneNum, callback::onComplete);
+    public void tryRegister(final String id, final String password, final String displayName, final String phoneNum, final String checkIn, UserRepositoryCallback<Result> callback) {
+        dataSource.tryRegister(id, password, displayName, phoneNum, checkIn, callback::onComplete);
     }
 
     public void getId(final UserRepositoryCallback<Result> callback) {

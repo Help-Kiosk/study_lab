@@ -5,12 +5,14 @@ public class User {
     private String userId;
     private String password;
     private String phoneNumber;
+    private String checkIn;
 
-    public User(String name, String userId, String password, String phoneNumber) {
+    public User(String name, String userId, String password, String phoneNumber,String checkIn) {
         this.name = name;
         this.userId = userId;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.checkIn = checkIn;
     }
 
     public String getName() {
@@ -43,5 +45,13 @@ public class User {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getCheckIn() {
+        return checkIn;
+    }
+
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
     }
 }

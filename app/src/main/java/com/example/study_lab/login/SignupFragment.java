@@ -170,8 +170,8 @@ public class SignupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (loginViewModel.checkId(et_email.getText().toString())) {
-                    user = new User(et_displayName.getText().toString(),et_email.getText().toString(),et_password.getText().toString(),et_phoneNum.getText().toString());
-                    loginViewModel.tryRegister(et_email.getText().toString(), et_password.getText().toString(), et_displayName.getText().toString(),et_phoneNum.getText().toString());
+                    user = new User(et_displayName.getText().toString(),et_email.getText().toString(),et_password.getText().toString(),et_phoneNum.getText().toString(),"");
+                    loginViewModel.tryRegister(et_email.getText().toString(), et_password.getText().toString(), et_displayName.getText().toString(),et_phoneNum.getText().toString(),"");
                 } else {
                     Toast.makeText(requireContext(), "Email already exists", Toast.LENGTH_SHORT).show();
                     et_email.setText("");
