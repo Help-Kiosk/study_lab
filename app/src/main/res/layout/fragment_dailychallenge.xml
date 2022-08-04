@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="100dp"
-    tools:context=".mnist.MnistFragment">
+    tools:context=".dailychallenge.DailyChallengeFragment">
 
 
     <TextView
@@ -24,14 +24,14 @@
         style="@style/ResultText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="--"
         android:textColor="@android:color/black"
         android:textSize="20dp"
         app:layout_constraintBottom_toTopOf="@+id/touch_view"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.example.study_lab.mnist.TouchView
+    <com.example.study_lab.dailychallenge.TouchView
         android:id="@+id/touch_view"
         android:layout_width="200dp"
         android:layout_height="200dp"
@@ -40,10 +40,10 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/daily_imageView" />
 
     <Button
-        android:id="@+id/btn_clear"
+        android:id="@+id/daily_btn_clear"
         android:layout_width="136dp"
         android:layout_height="48dp"
         android:layout_weight="1"
@@ -55,7 +55,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btn_detect"
+        android:id="@+id/daily_btn_detect"
         android:layout_width="136dp"
         android:layout_height="48dp"
         android:layout_weight="1"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/daily_imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
@@ -75,6 +75,17 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/daily_btn_submit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="제출하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"
@@ -88,7 +99,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
-
+        app:layout_constraintGuide_percent="0.88" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

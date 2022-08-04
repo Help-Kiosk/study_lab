@@ -146,4 +146,19 @@ public class FirebaseDataSource implements DataSource {
             }
         });
     }
+
+    public void loadAnswer(DataSourceCallback<Result> callback){
+        db.collection("answer")
+                .document("answer")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.isSuccessful()){
+                            DocumentSnapshot document = task.getResult();
+                            callback.onComplete(new Result.Success<DocumentSnapshot>(document));
+                        }
+                    }
+                });
+    }
 }

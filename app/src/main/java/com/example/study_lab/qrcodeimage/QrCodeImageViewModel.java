@@ -1,4 +1,4 @@
-package com.example.study_lab.QrCodeImage;
+package com.example.study_lab.qrcodeimage;
 
 import android.graphics.drawable.Drawable;
 
