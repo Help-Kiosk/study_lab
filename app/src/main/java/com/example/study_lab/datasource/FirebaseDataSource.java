@@ -29,12 +29,13 @@ public class FirebaseDataSource implements DataSource {
     private final FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
 
     @Override
-    public void tryRegister(String id, String password, String displayName, String phoneNum, DataSourceCallback<Result> callback) {
+    public void tryRegister(String id, String password, String displayName, String phoneNum, String checkIn, DataSourceCallback<Result> callback) {
         Map<String, String> user = new HashMap<>();
         user.put("id", id);
         user.put("password", password);
         user.put("displayName", displayName);
         user.put("phoneNum",phoneNum);
+        user.put("checkIn",checkIn);
 
         db.collection("users")
                 .document(id)
@@ -43,7 +44,7 @@ public class FirebaseDataSource implements DataSource {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d("datasource", "onSuccess: firestore finish");
-                        callback.onComplete(new Result.Success<String>("Success"));
+                        callback.onComplete(new Result.Success<String>( "Success"));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

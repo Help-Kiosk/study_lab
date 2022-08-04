@@ -26,7 +26,7 @@ public class UserRepository {
     protected Executor executor;
 
     private Map<String, Drawable> userQrDrawableMap = new HashMap<String, Drawable>();
-    private Map<String, User> userMap = new HashMap<>();
+    private Map<String,User> userMap = new HashMap<>();
 
     private String loggedInUserId;
 
@@ -60,7 +60,7 @@ public class UserRepository {
         loggedInUserId = userId;
     }
 
-    public void createQrForUser(final User toAdd, UserRepositoryCallback<Result> callback) {
+    public void createQrForUser(final User toAdd, UserRepositoryCallback<Result> callback){
         generateUserQr(toAdd, new UserRepositoryCallback<Result>() {
             @Override
             public void onComplete(Result result) {
