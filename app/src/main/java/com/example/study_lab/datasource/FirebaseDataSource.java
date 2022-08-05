@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.study_lab.model.Result;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -11,7 +12,9 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
@@ -172,6 +175,30 @@ public class FirebaseDataSource implements DataSource {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
                         callback.onComplete(new Result.Success<Task>(task));
+                    }
+                });
+    }
+
+    @Override
+    public void getUserCheckInState(String userId, ListenerCallback<Result<String>> callback){
+        db.collection("users")
+                .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if(error==null){
+                            String toReturn="";
+                            List<DocumentSnapshot> snaps = value.getDocuments();
+                            for(DocumentSnapshot snap:snaps){
+                                if(snap.getString("userId").equals(userId)){
+                                    if(snap.getString("checkIn").equals("true")){
+                                        toReturn = "true";
+                                    }
+                                }
+                            }
+                            callback.onUpdate(new Result.Success<String>(toReturn));
+                        }else{
+                            callback.onUpdate(new Result.Error(new Exception("error")));
+                        }
                     }
                 });
     }

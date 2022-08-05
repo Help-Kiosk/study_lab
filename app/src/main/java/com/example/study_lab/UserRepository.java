@@ -5,7 +5,11 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.study_lab.datasource.DataSource;
+import com.example.study_lab.datasource.ListenerCallback;
 import com.example.study_lab.model.Result;
 import com.example.study_lab.model.User;
 import com.google.zxing.BarcodeFormat;
@@ -27,6 +31,7 @@ public class UserRepository {
 
     private Map<String, Drawable> userQrDrawableMap = new HashMap<String, Drawable>();
     private Map<String, User> userMap = new HashMap<>();
+    private MutableLiveData<Boolean> isCheckInUserState = new MutableLiveData<>(false);
 
     private String loggedInUserId;
 
@@ -133,6 +138,19 @@ public class UserRepository {
             }
         });
     }
+
+    public void getUserCheckInState(String userId){
+        dataSource.getUserCheckInState(userId, new ListenerCallback<Result<String>>() {
+            @Override
+            public void onUpdate(Result<String> result) {
+                if(result instanceof Result.Success){
+                    isCheckInUserState.postValue(true);
+                }
+            }
+        });
+    }
+
+    public LiveData<Boolean> userCheckInState(){return isCheckInUserState;}
 
     public Drawable getQrDrawable(String userId) {
         return userQrDrawableMap.get(userId);

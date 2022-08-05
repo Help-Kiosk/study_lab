@@ -7,12 +7,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.study_lab.R;
 import com.example.study_lab.databinding.FragmentQrcodeimageBinding;
 
 public class QrCodeImageFragment extends Fragment {
@@ -36,6 +38,7 @@ public class QrCodeImageFragment extends Fragment {
         binding = FragmentQrcodeimageBinding.inflate(inflater, container, false);
         iv_qrCodeImage = binding.qrcodeIvQrcode;
         qrCodeImageViewModel.setUser(QrCodeImageFragmentArgs.fromBundle(getArguments()).getUserId());
+        qrCodeImageViewModel.getUserCheckInState(QrCodeImageFragmentArgs.fromBundle(getArguments()).getUserId());
         return binding.getRoot();
     }
 
@@ -47,6 +50,15 @@ public class QrCodeImageFragment extends Fragment {
             public void onChanged(Boolean isLoaded) {
                 if(isLoaded){
                     iv_qrCodeImage.setImageDrawable(qrCodeImageViewModel.getQrCodeImage());
+                }
+            }
+        });
+
+        qrCodeImageViewModel.isCheckInUserState().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean isUpdate) {
+                if(isUpdate){
+                    NavHostFragment.findNavController(QrCodeImageFragment.this).navigate(R.id.action_qrCodeImageFragment_to_dailyChallengeFragment);
                 }
             }
         });
