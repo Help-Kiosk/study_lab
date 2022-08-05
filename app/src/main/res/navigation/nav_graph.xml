@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/dailyChallengeFragment">
+    app:startDestination="@id/loginFragment">
     
     <fragment
         android:id="@+id/loginFragment"
@@ -36,6 +36,9 @@
             android:name="userId"
             android:defaultValue="userId"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_qrCodeImageFragment_to_dailyChallengeFragment"
+            app:destination="@id/dailyChallengeFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyChallengeFragment"

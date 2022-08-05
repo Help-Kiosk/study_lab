@@ -46,8 +46,8 @@ public class LoginViewModel extends ViewModel {
 
     }
 
-    public void tryRegister(String id, String password, String displayName,String phoneNum,String checkIn) {
-        userRepository.tryRegister(id, password, displayName, phoneNum, checkIn,result -> {
+    public void tryRegister(String id, String password, String displayName, String phoneNum, String checkIn) {
+        userRepository.tryRegister(id, password, displayName, phoneNum, checkIn, result -> {
             if (result instanceof Result.Success) {
                 registerSuccess.postValue(true);
             } else {
