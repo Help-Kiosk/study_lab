@@ -130,9 +130,9 @@ public class DailyChallengeFragment extends Fragment {
             public void onChanged(Boolean aBoolean) {
                 Task<Uri> pathUri = dailyChallengeViewModel.getUri();
 
-                Glide.with(requireContext())
-                        .load(pathUri.getResult())
-                        .into(imageView);
+//                Glide.with(requireContext())
+//                        .load(pathUri.getResult())
+//                        .into(imageView);
             }
         });
 
