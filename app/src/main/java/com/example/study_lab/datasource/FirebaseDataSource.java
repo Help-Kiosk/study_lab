@@ -168,13 +168,19 @@ public class FirebaseDataSource implements DataSource {
     }
 
     public void loadQuestion(DataSourceCallback<Result> callback) {
-        StorageReference ref = firebaseStorage.getReference().child("problemImages");
+        StorageReference ref = firebaseStorage.getReference().child("problemImages/problem_todayQuestion.jpg");
 
         ref.getDownloadUrl()
                 .addOnCompleteListener(new OnCompleteListener<Uri>() {
                     @Override
                     public void onComplete(@NonNull Task<Uri> task) {
-                        callback.onComplete(new Result.Success<Task>(task));
+                        if (task.isSuccessful()){
+                            callback.onComplete(new Result.Success<Task>(task));
+                        }
+                        else{
+                            callback.onComplete(new Result.Error(task.getException()));
+                        }
+
                     }
                 });
     }
