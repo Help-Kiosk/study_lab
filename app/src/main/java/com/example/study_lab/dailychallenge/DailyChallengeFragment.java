@@ -1,6 +1,7 @@
 package com.example.study_lab.dailychallenge;
 
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,12 +16,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
+import com.bumptech.glide.request.transition.Transition;
 import com.example.study_lab.R;
 import com.google.android.gms.tasks.Task;
 
@@ -132,7 +138,26 @@ public class DailyChallengeFragment extends Fragment {
 
                 Glide.with(requireContext())
                         .load(pathUri.getResult())
-                        .into(imageView);
+                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
+                        .into(new SimpleTarget<Drawable>() {
+                            @Override
+                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
+                                final int imageHeight = resource.getIntrinsicHeight();
+                                final int imageWidth = resource.getIntrinsicWidth();
+
+                                ViewTreeObserver vto = imageView.getViewTreeObserver();
+                                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                                    @Override
+                                    public void onGlobalLayout() {
+                                        imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                                        int width = imageView.getMeasuredWidth();
+                                        int height = (width * imageHeight)/imageWidth;
+
+                                        imageView.setLayoutParams(new LinearLayout.LayoutParams(width, height));
+                                    }
+                                });
+                            }
+                        });
             }
         });
 
