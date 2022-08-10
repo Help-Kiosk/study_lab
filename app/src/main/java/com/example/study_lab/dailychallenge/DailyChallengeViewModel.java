@@ -2,6 +2,7 @@ package com.example.study_lab.dailychallenge;
 
 import android.app.Activity;
 import android.net.Uri;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -106,6 +107,9 @@ public class DailyChallengeViewModel extends ViewModel {
             if (result instanceof Result.Success){
                 pathUri = ((Result.Success<Task>)result).getData();
                 uriLoaded.setValue(true);
+            }
+            else{
+                Log.d("DEBUG", "loadQuestion:  faiil to get image");
             }
         });
 
