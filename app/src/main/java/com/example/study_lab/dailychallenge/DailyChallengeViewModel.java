@@ -12,7 +12,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.study_lab.UserRepository;
-import com.example.study_lab.datasource.DataSourceCallback;
 import com.example.study_lab.model.Result;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -97,8 +96,8 @@ public class DailyChallengeViewModel extends ViewModel {
     };
 
 
-    public void loadAnswer() {
-        userRepository.loadAnswer(result -> {
+    public void getAnswer() {
+        userRepository.getAnswer(result -> {
             if (result instanceof Result.Success) {
                 DocumentSnapshot document = ((Result.Success<DocumentSnapshot>) result).getData();
                 dataLoaded.setValue(Integer.valueOf((String) document.get("answer")));

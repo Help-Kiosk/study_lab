@@ -103,7 +103,7 @@ public class DailyChallengeFragment extends Fragment {
                 if (output < 1 || output > 6) {
                     Toast.makeText(requireContext(), "올바른 숫자를 입력해주세요.", Toast.LENGTH_SHORT).show();
                 } else {
-                    dailyChallengeViewModel.loadAnswer();
+                    dailyChallengeViewModel.getAnswer();
                 }
             }
         });

@@ -104,16 +104,16 @@
             app:layout_constraintTop_toBottomOf="@+id/signup_et_passwordCheck" />
 
         <TextView
-            android:id="@+id/signup_tv_phonenum"
+            android:id="@+id/signup_tv_phoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="phone number"
+            android:text="parents' phone number"
             android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/signup_et_phonenum"
-            app:layout_constraintStart_toStartOf="@+id/signup_et_phonenum" />
+            app:layout_constraintBottom_toTopOf="@+id/signup_et_phoneNumber"
+            app:layout_constraintStart_toStartOf="@+id/signup_et_phoneNumber" />
 
         <EditText
-            android:id="@+id/signup_et_phonenum"
+            android:id="@+id/signup_et_phoneNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -134,7 +134,7 @@
             android:text="Signup"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signup_et_phonenum" />
+            app:layout_constraintTop_toBottomOf="@+id/signup_et_phoneNumber" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,6 +1,5 @@
 package com.example.study_lab.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -103,13 +102,25 @@ public class LoginFragment extends Fragment {
         loginViewModel.isLoggedIn().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isLoggedIn) {
-                if (isLoggedIn == true) {
-                    loginViewModel.setUserId(et_email.getText().toString());
+                if (isLoggedIn) {
+                    loginViewModel.setUser(et_email.getText().toString());
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    et_email.setText(null);
+                    et_password.setText(null);
+                }
+            }
+        });
+
+        loginViewModel.doesUserSetSuccess().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean doseUserSetSuccess) {
+                if (doseUserSetSuccess) {
                     LoginFragmentDirections.ActionLoginFragmentToQrCodeImageFragment action = LoginFragmentDirections.actionLoginFragmentToQrCodeImageFragment();
                     action.setUserId(et_email.getText().toString());
                     NavHostFragment.findNavController(LoginFragment.this).navigate(action);
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "fail to set", Toast.LENGTH_SHORT).show();
                     et_email.setText(null);
                     et_password.setText(null);
                 }

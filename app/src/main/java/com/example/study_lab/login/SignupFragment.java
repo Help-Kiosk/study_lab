@@ -56,11 +56,10 @@ public class SignupFragment extends Fragment {
         et_password = view.findViewById(R.id.signup_et_password);
         et_passwordCheck = view.findViewById(R.id.signup_et_passwordCheck);
         et_displayName = view.findViewById(R.id.signup_et_displayName);
-        et_phoneNum = view.findViewById(R.id.signup_et_phonenum);
+        et_phoneNum = view.findViewById(R.id.signup_et_phoneNumber);
         bt_signup = view.findViewById(R.id.signup_bt_signup);
 
-
-        loginViewModel.getId();
+        loginViewModel.getAllUsersId();
 
         //region Observer
         loginViewModel.getSignupFormState().observe(getViewLifecycleOwner(), new Observer<SignupFormState>() {

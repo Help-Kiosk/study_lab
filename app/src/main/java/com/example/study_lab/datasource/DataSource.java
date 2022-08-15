@@ -7,11 +7,13 @@ public interface DataSource {
 
     void tryLogin(String id, String password, DataSourceCallback<Result> callback);
 
-    void getId(DataSourceCallback<Result> callback);
+    void getAllUsersId(DataSourceCallback<Result> callback);
 
     void getAnswer(DataSourceCallback<Result> callback);
 
-    void changeCheckInState(String userId, DataSourceCallback<Result> callback);
+    void getUserInformation(String id, DataSourceCallback<Result> callback);
 
-    void getUserCheckInState(String userId, ListenerCallback<Result<String>> callback);
+    void getUserCheckInState(String id, ListenerCallback<Result<String>> callback);
+
+    void changeCheckInState(String id, DataSourceCallback<Result> callback);
 }

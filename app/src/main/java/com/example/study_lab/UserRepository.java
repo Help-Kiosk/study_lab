@@ -13,6 +13,7 @@ import com.example.study_lab.datasource.DataSourceCallback;
 import com.example.study_lab.datasource.ListenerCallback;
 import com.example.study_lab.model.Result;
 import com.example.study_lab.model.User;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
@@ -21,6 +22,7 @@ import com.google.zxing.qrcode.QRCodeWriter;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.Executor;
 
 public class UserRepository {
@@ -32,9 +34,7 @@ public class UserRepository {
 
     private Map<String, Drawable> userQrDrawableMap = new HashMap<String, Drawable>();
     private Map<String, User> userMap = new HashMap<>();
-    private MutableLiveData<Boolean> isCheckInUserState = new MutableLiveData<>(false);
-
-    private String loggedInUserId;
+    private MutableLiveData<Boolean> userCheckedIn = new MutableLiveData<>(false);
 
     public static UserRepository getInstance() {
         return INSTANCE;
@@ -44,21 +44,25 @@ public class UserRepository {
         dataSource.tryRegister(id, password, displayName, phoneNum, checkIn, callback::onComplete);
     }
 
-    public void getId(final UserRepositoryCallback<Result> callback) {
-        dataSource.getId(callback::onComplete);
+    public void tryLogin(final String id, final String password, UserRepositoryCallback<Result> callback) {
+        dataSource.tryLogin(id, password, callback::onComplete);
     }
 
-    public User getUser(String userId) {
-        if (userMap.containsKey(userId))
-            return userMap.get(userId);
+    public void getAllUsersId(final UserRepositoryCallback<Result> callback) {
+        dataSource.getAllUsersId(callback::onComplete);
+    }
+
+    public User getUser(String id) {
+        if (userMap.containsKey(id))
+            return userMap.get(id);
         return null;
     }
 
-    public void changeCheckInState(String userId, DataSourceCallback<Result> callback) {
-        dataSource.changeCheckInState(userId, callback::onComplete);
+    public void changeCheckInState(String id, UserRepositoryCallback<Result> callback) {
+        dataSource.changeCheckInState(id, callback::onComplete);
     }
 
-    public void loadAnswer(UserRepositoryCallback<Result> callback) {
+    public void getAnswer(UserRepositoryCallback<Result> callback) {
         dataSource.getAnswer(callback::onComplete);
     }
 
@@ -71,12 +75,24 @@ public class UserRepository {
         });
     }
 
-    public void tryLogin(final String id, final String password, UserRepositoryCallback<Result> callback) {
-        dataSource.tryLogin(id, password, callback::onComplete);
-    }
-
-    public void saveRepositoryUserId(final String userId) {
-        loggedInUserId = userId;
+    public void setUser(String id, UserRepositoryCallback<Result> callback) {
+        dataSource.getUserInformation(id, new DataSourceCallback<Result>() {
+            @Override
+            public void onComplete(Result result) {
+                if (result instanceof Result.Success) {
+                    DocumentSnapshot documentSnapshot = ((Result.Success<DocumentSnapshot>) result).getData();
+                    User tmpUser = new User(
+                            Objects.requireNonNull(documentSnapshot.get("name")).toString(),
+                            Objects.requireNonNull(documentSnapshot.get("id")).toString(),
+                            Objects.requireNonNull(documentSnapshot.get("password")).toString(),
+                            Objects.requireNonNull(documentSnapshot.get("phoneNumber")).toString(),
+                            Objects.requireNonNull(documentSnapshot.get("checkIn")).toString()
+                    );
+                    userMap.put(id, tmpUser);
+                    callback.onComplete(result);
+                }
+            }
+        });
     }
 
     public void createQrForUser(final User toAdd, UserRepositoryCallback<Result> callback) {
@@ -136,39 +152,39 @@ public class UserRepository {
         }
     }
 
-    public void loadQrDrawableForUser(String userId, UserRepositoryCallback<Result<Drawable>> callback) {
-        fileService.getImageDrawable(App.getQrImagePath(userId), new FileService.FileServiceCallback<Result<Drawable>>() {
+    public void loadQrDrawableForUser(String id, UserRepositoryCallback<Result<Drawable>> callback) {
+        fileService.getImageDrawable(App.getQrImagePath(id), new FileService.FileServiceCallback<Result<Drawable>>() {
             @Override
             public void onComplete(Result result) {
                 if (result instanceof Result.Success) {
                     Drawable drawable = ((Result.Success<Drawable>) result).getData();
-                    userQrDrawableMap.put(userId, drawable);
+                    userQrDrawableMap.put(id, drawable);
                 }
                 callback.onComplete(result);
             }
         });
     }
 
-    public void getUserCheckInState(String userId) {
-        dataSource.getUserCheckInState(userId, new ListenerCallback<Result<String>>() {
+    public void getUserCheckInState(String id) {
+        dataSource.getUserCheckInState(id, new ListenerCallback<Result<String>>() {
             @Override
             public void onUpdate(Result<String> result) {
                 if (result instanceof Result.Success) {
                     String isCheckIn = ((Result.Success<String>) result).getData();
-                    if (isCheckIn.equals("true")){
-                        isCheckInUserState.postValue(true);
+                    if (isCheckIn.equals("true")) {
+                        userCheckedIn.postValue(true);
                     }
                 }
             }
         });
     }
 
-    public LiveData<Boolean> userCheckInState() {
-        return isCheckInUserState;
+    public LiveData<Boolean> isUserCheckedIn() {
+        return userCheckedIn;
     }
 
-    public Drawable getQrDrawable(String userId) {
-        return userQrDrawableMap.get(userId);
+    public Drawable getQrDrawable(String id) {
+        return userQrDrawableMap.get(id);
     }
 
     public void setExecutor(Executor exec) {
