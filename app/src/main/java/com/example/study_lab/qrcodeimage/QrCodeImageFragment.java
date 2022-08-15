@@ -1,15 +1,20 @@
 package com.example.study_lab.qrcodeimage;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.telephony.SmsManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,7 +56,7 @@ public class QrCodeImageFragment extends Fragment {
         qrCodeImageViewModel.isQrImageLoaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isLoaded) {
-                if(isLoaded){
+                if (isLoaded) {
                     iv_qrCodeImage.setImageDrawable(qrCodeImageViewModel.getQrCodeImage());
                 }
             }
@@ -60,9 +65,15 @@ public class QrCodeImageFragment extends Fragment {
         qrCodeImageViewModel.isUserCheckedIn().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isUserCheckedIn) {
-                if(isUserCheckedIn){
+                if (isUserCheckedIn) {
+
+                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) !=
+                            PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.SEND_SMS}, 1);
+                    }
+
                     User user = qrCodeImageViewModel.getCurrUser();
-                    String msg = user.getName()+" 학생이 등원하였습니다.";
+                    String msg = user.getName() + " 학생이 등원하였습니다.";
 
                     try {
                         SmsManager smsManager = SmsManager.getDefault();
@@ -70,6 +81,7 @@ public class QrCodeImageFragment extends Fragment {
                         Toast.makeText(getActivity().getApplicationContext(), "메시지 전송 완료", Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
                         Toast.makeText(getActivity().getApplicationContext(), "메시지 전송 실패", Toast.LENGTH_SHORT).show();
+                        Log.d("DEBUG", "onChanged: ");
                     }
 
                     qrCodeImageViewModel.changeCheckInState(QrCodeImageFragmentArgs.fromBundle(getArguments()).getUserId());
