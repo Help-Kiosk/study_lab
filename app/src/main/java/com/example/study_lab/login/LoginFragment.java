@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.study_lab.R;
+
 public class LoginFragment extends Fragment {
     private LoginViewModel loginViewModel;
 
@@ -28,7 +29,7 @@ public class LoginFragment extends Fragment {
     private Button bt_login;
     private Button bt_signup;
 
-    private  long pressedTime = 0;
+    private long pressedTime = 0;
 
     public LoginFragment() {
     }
@@ -41,11 +42,11 @@ public class LoginFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if(System.currentTimeMillis()>pressedTime+2000){
+                if (System.currentTimeMillis() > pressedTime + 2000) {
                     pressedTime = System.currentTimeMillis();
-                    Toast.makeText(requireContext(),"Press once more to exit",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(requireContext(),"Exit the app",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Press once more to exit", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(requireContext(), "Exit the app", Toast.LENGTH_SHORT).show();
                     requireActivity().finish();
                 }
             }

@@ -11,5 +11,7 @@ public interface DataSource {
 
     void getAnswer(DataSourceCallback<Result> callback);
 
+    void changeCheckInState(String userId, DataSourceCallback<Result> callback);
+
     void getUserCheckInState(String userId, ListenerCallback<Result<String>> callback);
 }

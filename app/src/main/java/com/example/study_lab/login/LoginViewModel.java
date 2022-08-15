@@ -16,7 +16,7 @@ public class LoginViewModel extends ViewModel {
     private UserRepository userRepository = UserRepository.getInstance();
     private MutableLiveData<Boolean> registerSuccess = new MutableLiveData<>();
     private final MutableLiveData<SignupFormState> signupFormState = new MutableLiveData<>(new SignupFormState(null, null, null, null, false));
-    private final MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>(new LoginFormState(null,null,false));
+    private final MutableLiveData<LoginFormState> loginFormState = new MutableLiveData<>(new LoginFormState(null, null, false));
     private MutableLiveData<Boolean> doingWork = new MutableLiveData<>(false);
     private MutableLiveData<Boolean> loggedIn = new MutableLiveData<>();
     private MutableLiveData<Boolean> addUserSuccess = new MutableLiveData<>(false);
@@ -27,7 +27,7 @@ public class LoginViewModel extends ViewModel {
     private String displayNameText = "";
 
     private String loginIdText = "";
-    private String loginPasswordText="";
+    private String loginPasswordText = "";
 
     private String loggedName;
 
@@ -55,29 +55,30 @@ public class LoginViewModel extends ViewModel {
             }
         });
     }
-    public void onLoginIdTextChanged(String changedId){
+
+    public void onLoginIdTextChanged(String changedId) {
         loginIdText = changedId;
-        if(changedId.length()==0){
-            loginFormState.setValue(new LoginFormState(null,null,false));
-        }else if(!isEmailValid(loginIdText)){
-            loginFormState.setValue(new LoginFormState("Email format is wrong", loginFormState.getValue().getPasswordErrorMessage(),false));
-        }else if(isPasswordValid(loginPasswordText)){
-            loginFormState.setValue(new LoginFormState(null,null,true));
-        }else if(loginFormState.getValue().getIdErrorMessage()!=null){
-            loginFormState.setValue(new LoginFormState(null, loginFormState.getValue().getPasswordErrorMessage(),false));
+        if (changedId.length() == 0) {
+            loginFormState.setValue(new LoginFormState(null, null, false));
+        } else if (!isEmailValid(loginIdText)) {
+            loginFormState.setValue(new LoginFormState("Email format is wrong", loginFormState.getValue().getPasswordErrorMessage(), false));
+        } else if (isPasswordValid(loginPasswordText)) {
+            loginFormState.setValue(new LoginFormState(null, null, true));
+        } else if (loginFormState.getValue().getIdErrorMessage() != null) {
+            loginFormState.setValue(new LoginFormState(null, loginFormState.getValue().getPasswordErrorMessage(), false));
         }
     }
 
-    public void onLoginPasswordTextChanged(String changedPassword){
+    public void onLoginPasswordTextChanged(String changedPassword) {
         loginPasswordText = changedPassword;
-        if(changedPassword.length()==0){
-            loginFormState.setValue(new LoginFormState(null,null,false));
-        }else if(!isPasswordValid(loginPasswordText)){
-            loginFormState.setValue(new LoginFormState(loginFormState.getValue().getIdErrorMessage(), "Password is too short",false));
-        }else if(isEmailValid(loginIdText)){
-            loginFormState.setValue(new LoginFormState(null,null,true));
-        }else if(loginFormState.getValue().getPasswordErrorMessage()!=null){
-            loginFormState.setValue(new LoginFormState(loginFormState.getValue().getIdErrorMessage(), null,false));
+        if (changedPassword.length() == 0) {
+            loginFormState.setValue(new LoginFormState(null, null, false));
+        } else if (!isPasswordValid(loginPasswordText)) {
+            loginFormState.setValue(new LoginFormState(loginFormState.getValue().getIdErrorMessage(), "Password is too short", false));
+        } else if (isEmailValid(loginIdText)) {
+            loginFormState.setValue(new LoginFormState(null, null, true));
+        } else if (loginFormState.getValue().getPasswordErrorMessage() != null) {
+            loginFormState.setValue(new LoginFormState(loginFormState.getValue().getIdErrorMessage(), null, false));
         }
     }
 
@@ -127,7 +128,7 @@ public class LoginViewModel extends ViewModel {
             signupFormState.setValue(new SignupFormState(null, null, null, null, false));
         } else if (!isDisplayNameValid(displayNameText)) {
             signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), signupFormState.getValue().getPasswordErrorMessage(), signupFormState.getValue().getPasswordCheckErrorMessage(), "Name is too short", false));
-        } else if (isEmailValid(idText) && isPasswordValid(passwordText)&&isPasswordEqual(passwordText,passwordCheckText)) {
+        } else if (isEmailValid(idText) && isPasswordValid(passwordText) && isPasswordEqual(passwordText, passwordCheckText)) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, true));
         } else if (signupFormState.getValue().getDisplayNameErrorMessage() != null) {
             signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), signupFormState.getValue().getPasswordErrorMessage(), signupFormState.getValue().getPasswordCheckErrorMessage(), null, false));
@@ -169,12 +170,12 @@ public class LoginViewModel extends ViewModel {
         }
     }
 
-    public void saveRepositoryUserId(String userId){
+    public void saveRepositoryUserId(String userId) {
         userRepository.saveRepositoryUserId(userId);
     }
 
-    public void setUserId(String userId){
-        loggedName=userId;
+    public void setUserId(String userId) {
+        loggedName = userId;
         saveRepositoryUserId(userId);
     }
 
@@ -182,16 +183,15 @@ public class LoginViewModel extends ViewModel {
         return !(displayName.length() < 2);
     }
 
-    public void createQrForUser(User toCreate){
-        userRepository.createQrForUser(toCreate, result->{
-           if(result instanceof Result.Success){
-               addUserSuccess.postValue(true);
-           } else{
-               addUserSuccess.postValue(false);
-           }
+    public void createQrForUser(User toCreate) {
+        userRepository.createQrForUser(toCreate, result -> {
+            if (result instanceof Result.Success) {
+                addUserSuccess.postValue(true);
+            } else {
+                addUserSuccess.postValue(false);
+            }
         });
     }
-
 
     public LiveData<Boolean> registerSuccess() {
         return registerSuccess;

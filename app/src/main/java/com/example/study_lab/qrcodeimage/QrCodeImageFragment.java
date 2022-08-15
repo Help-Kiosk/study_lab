@@ -58,7 +58,9 @@ public class QrCodeImageFragment extends Fragment {
             @Override
             public void onChanged(Boolean isUpdate) {
                 if(isUpdate){
-                    NavHostFragment.findNavController(QrCodeImageFragment.this).navigate(R.id.action_qrCodeImageFragment_to_dailyChallengeFragment);
+                    qrCodeImageViewModel.changeCheckInState(QrCodeImageFragmentArgs.fromBundle(getArguments()).getUserId());
+                    NavHostFragment.findNavController(QrCodeImageFragment.this)
+                            .navigate(R.id.action_qrCodeImageFragment_to_dailyChallengeFragment);
                 }
             }
         });

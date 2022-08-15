@@ -9,6 +9,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.study_lab.datasource.DataSource;
+import com.example.study_lab.datasource.DataSourceCallback;
 import com.example.study_lab.datasource.ListenerCallback;
 import com.example.study_lab.model.Result;
 import com.example.study_lab.model.User;
@@ -42,7 +43,7 @@ public class UserRepository {
     public void tryRegister(final String id, final String password, final String displayName, final String phoneNum, final String checkIn, UserRepositoryCallback<Result> callback) {
         dataSource.tryRegister(id, password, displayName, phoneNum, checkIn, callback::onComplete);
     }
-    
+
     public void getId(final UserRepositoryCallback<Result> callback) {
         dataSource.getId(callback::onComplete);
     }
@@ -53,11 +54,15 @@ public class UserRepository {
         return null;
     }
 
+    public void changeCheckInState(String userId, DataSourceCallback<Result> callback) {
+        dataSource.changeCheckInState(userId, callback::onComplete);
+    }
+
     public void loadAnswer(UserRepositoryCallback<Result> callback) {
         dataSource.getAnswer(callback::onComplete);
     }
 
-    public void loadQuestion(UserRepositoryCallback<Result> callback){
+    public void loadQuestion(UserRepositoryCallback<Result> callback) {
         fileService.getImageDrawable("problemImages/problem_todayQuestion.jpg", new FileService.FileServiceCallback<Result<Drawable>>() {
             @Override
             public void onComplete(Result result) {
@@ -144,18 +149,23 @@ public class UserRepository {
         });
     }
 
-    public void getUserCheckInState(String userId){
+    public void getUserCheckInState(String userId) {
         dataSource.getUserCheckInState(userId, new ListenerCallback<Result<String>>() {
             @Override
             public void onUpdate(Result<String> result) {
-                if(result instanceof Result.Success){
-                    isCheckInUserState.postValue(true);
+                if (result instanceof Result.Success) {
+                    String isCheckIn = ((Result.Success<String>) result).getData();
+                    if (isCheckIn.equals("true")){
+                        isCheckInUserState.postValue(true);
+                    }
                 }
             }
         });
     }
 
-    public LiveData<Boolean> userCheckInState(){return isCheckInUserState;}
+    public LiveData<Boolean> userCheckInState() {
+        return isCheckInUserState;
+    }
 
     public Drawable getQrDrawable(String userId) {
         return userQrDrawableMap.get(userId);

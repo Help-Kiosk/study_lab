@@ -68,8 +68,8 @@ public class DailyChallengeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        touchView = view.findViewById(R.id.touch_view);
-        tv_predict = view.findViewById(R.id.tv_predict);
+        touchView = view.findViewById(R.id.daily_touch_view);
+        tv_predict = view.findViewById(R.id.daily_tv_predict);
         btn_clear = view.findViewById(R.id.daily_btn_clear);
         btn_detect = view.findViewById(R.id.daily_btn_detect);
         btn_submit = view.findViewById(R.id.daily_btn_submit);

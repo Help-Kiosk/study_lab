@@ -16,6 +16,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,7 +33,8 @@ public class FirebaseDataSource implements DataSource {
     private final FirebaseStorage firebaseStorage = FirebaseStorage.getInstance();
 
     @Override
-    public void tryRegister(String id, String password, String displayName, String phoneNum, String checkIn, DataSourceCallback<Result> callback) {
+    public void tryRegister(String id, String password, String displayName, String phoneNum,
+                            String checkIn, DataSourceCallback<Result> callback) {
         Map<String, String> user = new HashMap<>();
         user.put("id", id);
         user.put("password", password);
@@ -165,6 +167,26 @@ public class FirebaseDataSource implements DataSource {
                 });
     }
 
+    public void changeCheckInState(String userId, DataSourceCallback<Result> callback){
+        db.collection("users")
+                .document(userId)
+                .update("checkIn", "false")
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Log.d("datasource", "onSuccess: firestore finish");
+                        callback.onComplete(new Result.Success<String>("Success"));
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d("datasource", "onSuccess: firestore not finish");
+                        callback.onComplete(new Result.Error(new Exception("Failed")));
+                    }
+                });
+    }
+
     @Override
     public void getUserCheckInState(String userId, ListenerCallback<Result<String>> callback) {
         db.collection("users")
@@ -174,8 +196,9 @@ public class FirebaseDataSource implements DataSource {
                         if (error == null) {
                             String toReturn = "";
                             List<DocumentSnapshot> snaps = value.getDocuments();
+
                             for (DocumentSnapshot snap : snaps) {
-                                if (snap.getString("userId").equals(userId)) {
+                                if (snap.getString("id").equals(userId)) {
                                     if (snap.getString("checkIn").equals("true")) {
                                         toReturn = "true";
                                     }

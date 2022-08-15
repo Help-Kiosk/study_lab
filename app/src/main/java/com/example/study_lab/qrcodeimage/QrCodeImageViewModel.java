@@ -1,6 +1,7 @@
 package com.example.study_lab.qrcodeimage;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -34,6 +35,14 @@ public class QrCodeImageViewModel extends ViewModel {
 
     public void getUserCheckInState(String userId) {
         userRepository.getUserCheckInState(userId);
+    }
+
+    public void changeCheckInState(String userId){
+        userRepository.changeCheckInState(userId, result -> {
+            if (result instanceof Result.Error){
+                Log.d("DEBUG", "changeCheckInState: fail to change checkIn state");
+            }
+        });
     }
 
     public LiveData<Boolean> isCheckInUserState() {
