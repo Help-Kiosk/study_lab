@@ -37,8 +37,8 @@ public class FirebaseDataSource implements DataSource {
         user.put("id", id);
         user.put("password", password);
         user.put("displayName", displayName);
-        user.put("phoneNum",phoneNum);
-        user.put("checkIn",checkIn);
+        user.put("phoneNum", phoneNum);
+        user.put("checkIn", checkIn);
 
         db.collection("users")
                 .document(id)
@@ -47,7 +47,7 @@ public class FirebaseDataSource implements DataSource {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d("datasource", "onSuccess: firestore finish");
-                        callback.onComplete(new Result.Success<String>( "Success"));
+                        callback.onComplete(new Result.Success<String>("Success"));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -121,8 +121,6 @@ public class FirebaseDataSource implements DataSource {
                         if (task.isSuccessful()) {
                             Uri result = task.getResult();
                             callback.onComplete(new Result.Success<Uri>(result));
-                        } else {
-
                         }
                     }
                 });
@@ -152,7 +150,7 @@ public class FirebaseDataSource implements DataSource {
         });
     }
 
-    public void loadAnswer(DataSourceCallback<Result> callback) {
+    public void getAnswer(DataSourceCallback<Result> callback) {
         db.collection("answer")
                 .document("answer")
                 .get()
@@ -167,42 +165,24 @@ public class FirebaseDataSource implements DataSource {
                 });
     }
 
-    public void loadQuestion(DataSourceCallback<Result> callback) {
-        StorageReference ref = firebaseStorage.getReference().child("problemImages/problem_todayQuestion.jpg");
-
-        ref.getDownloadUrl()
-                .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Uri> task) {
-                        if (task.isSuccessful()){
-                            callback.onComplete(new Result.Success<Task>(task));
-                        }
-                        else{
-                            callback.onComplete(new Result.Error(task.getException()));
-                        }
-
-                    }
-                });
-    }
-
     @Override
-    public void getUserCheckInState(String userId, ListenerCallback<Result<String>> callback){
+    public void getUserCheckInState(String userId, ListenerCallback<Result<String>> callback) {
         db.collection("users")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                        if(error==null){
-                            String toReturn="";
+                        if (error == null) {
+                            String toReturn = "";
                             List<DocumentSnapshot> snaps = value.getDocuments();
-                            for(DocumentSnapshot snap:snaps){
-                                if(snap.getString("userId").equals(userId)){
-                                    if(snap.getString("checkIn").equals("true")){
+                            for (DocumentSnapshot snap : snaps) {
+                                if (snap.getString("userId").equals(userId)) {
+                                    if (snap.getString("checkIn").equals("true")) {
                                         toReturn = "true";
                                     }
                                 }
                             }
                             callback.onUpdate(new Result.Success<String>(toReturn));
-                        }else{
+                        } else {
                             callback.onUpdate(new Result.Error(new Exception("error")));
                         }
                     }

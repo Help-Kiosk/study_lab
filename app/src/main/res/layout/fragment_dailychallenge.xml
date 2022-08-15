@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="100dp"
     tools:context=".dailychallenge.DailyChallengeFragment">
 
 
@@ -16,11 +15,11 @@
         android:layout_height="wrap_content"
         android:text="정답을 그려주세요."
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/predict_text"
+        app:layout_constraintBottom_toTopOf="@+id/tv_predict"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/predict_text"
+        android:id="@+id/tv_predict"
         style="@style/ResultText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -40,7 +39,7 @@
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/daily_imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/daily_iv_answer" />
 
     <Button
         android:id="@+id/daily_btn_clear"
@@ -67,15 +66,15 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/daily_imageView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/daily_iv_answer"
+        android:layout_width="305dp"
+        android:layout_height="260dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        android:adjustViewBounds="true"
-        tools:src="@tools:sample/avatars" />
+        android:scaleType="fitXY"
+        tools:src="@tools:sample/avatars[1]" />
 
     <Button
         android:id="@+id/daily_btn_submit"
@@ -93,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.28" />
+        app:layout_constraintGuide_percent="0.38" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

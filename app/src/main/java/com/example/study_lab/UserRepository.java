@@ -54,11 +54,16 @@ public class UserRepository {
     }
 
     public void loadAnswer(UserRepositoryCallback<Result> callback) {
-        dataSource.loadAnswer(callback::onComplete);
+        dataSource.getAnswer(callback::onComplete);
     }
 
     public void loadQuestion(UserRepositoryCallback<Result> callback){
-        dataSource.loadQuestion(callback::onComplete);
+        fileService.getImageDrawable("problemImages/problem_todayQuestion.jpg", new FileService.FileServiceCallback<Result<Drawable>>() {
+            @Override
+            public void onComplete(Result result) {
+                callback.onComplete(result);
+            }
+        });
     }
 
     public void tryLogin(final String id, final String password, UserRepositoryCallback<Result> callback) {

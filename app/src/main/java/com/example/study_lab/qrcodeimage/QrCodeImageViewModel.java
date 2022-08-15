@@ -32,11 +32,13 @@ public class QrCodeImageViewModel extends ViewModel {
         });
     }
 
-    public void getUserCheckInState(String userId){
+    public void getUserCheckInState(String userId) {
         userRepository.getUserCheckInState(userId);
     }
 
-    public LiveData<Boolean> isCheckInUserState(){return userRepository.userCheckInState();}
+    public LiveData<Boolean> isCheckInUserState() {
+        return userRepository.userCheckInState();
+    }
 
     public LiveData<Boolean> isQrImageLoaded() {
         return isQrLoaded;

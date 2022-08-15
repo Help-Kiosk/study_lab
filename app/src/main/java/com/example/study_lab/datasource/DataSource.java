@@ -9,9 +9,7 @@ public interface DataSource {
 
     void getId(DataSourceCallback<Result> callback);
 
-    void loadAnswer(DataSourceCallback<Result> callback);
-
-    void loadQuestion(DataSourceCallback<Result> callback);
+    void getAnswer(DataSourceCallback<Result> callback);
 
     void getUserCheckInState(String userId, ListenerCallback<Result<String>> callback);
 }

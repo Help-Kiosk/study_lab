@@ -1,6 +1,7 @@
 package com.example.study_lab.dailychallenge;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 
@@ -23,6 +24,8 @@ public class DailyChallengeViewModel extends ViewModel {
     private UserRepository userRepository = UserRepository.getInstance();
     private MutableLiveData<Integer> dataLoaded = new MutableLiveData<>();
     private MutableLiveData<Boolean> uriLoaded = new MutableLiveData<>();
+    private Drawable answerImage;
+
     private Task<Uri> pathUri = new Task<Uri>() {
         @NonNull
         @Override
@@ -93,23 +96,22 @@ public class DailyChallengeViewModel extends ViewModel {
     };
 
 
-    public void loadAnswer(){
-        userRepository.loadAnswer(result ->{
-            if (result instanceof Result.Success){
+    public void loadAnswer() {
+        userRepository.loadAnswer(result -> {
+            if (result instanceof Result.Success) {
                 DocumentSnapshot document = ((Result.Success<DocumentSnapshot>) result).getData();
                 dataLoaded.setValue(Integer.valueOf((String) document.get("answer")));
             }
         });
     }
 
-    public void loadQuestion(){
+    public void loadQuestion() {
         userRepository.loadQuestion(result -> {
-            if (result instanceof Result.Success){
-                pathUri = ((Result.Success<Task>)result).getData();
-                uriLoaded.setValue(true);
-            }
-            else{
-                Log.d("DEBUG", "loadQuestion:  faiil to get image");
+            if (result instanceof Result.Success) {
+                answerImage = ((Result.Success<Drawable>) result).getData();
+                uriLoaded.postValue(true);
+            } else {
+                Log.d("DEBUG", "loadQuestion:  fail to get image");
             }
         });
 
@@ -118,6 +120,12 @@ public class DailyChallengeViewModel extends ViewModel {
     public LiveData<Integer> getDataLoaded() {
         return dataLoaded;
     }
-    public LiveData<Boolean> isUriLoaded(){return uriLoaded;}
-    public Task<Uri> getUri(){return pathUri;}
+
+    public LiveData<Boolean> isUriLoaded() {
+        return uriLoaded;
+    }
+
+    public Drawable getAnswerImage() {
+        return answerImage;
+    }
 }
