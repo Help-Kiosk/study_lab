@@ -16,11 +16,13 @@ import androidx.annotation.Nullable;
 public class TouchView extends View {
     private float penX;
     private float penY;
+
     private Path path = new Path();
     private Paint drawingPaint = new Paint(Paint.DITHER_FLAG);
+    private Paint pen = new Paint(Paint.DITHER_FLAG);
+
     private Bitmap drawingBitmap;
     private Canvas drawingCanvas;
-    private Paint pen = new Paint(Paint.DITHER_FLAG);
 
     public TouchView(Context context, @Nullable AttributeSet attrs){
         super(context, attrs);

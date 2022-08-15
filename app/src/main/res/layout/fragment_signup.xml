@@ -86,11 +86,11 @@
             android:layout_height="wrap_content"
             android:text="Name"
             android:textSize="15sp"
-            app:layout_constraintBottom_toTopOf="@+id/signup_et_displayName"
-            app:layout_constraintStart_toStartOf="@+id/signup_et_displayName" />
+            app:layout_constraintBottom_toTopOf="@+id/signup_et_name"
+            app:layout_constraintStart_toStartOf="@+id/signup_et_name" />
 
         <EditText
-            android:id="@+id/signup_et_displayName"
+            android:id="@+id/signup_et_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -124,14 +124,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/signup_et_displayName" />
+            app:layout_constraintTop_toBottomOf="@+id/signup_et_name" />
 
         <Button
-            android:id="@+id/signup_bt_signup"
+            android:id="@+id/signup_bt_signUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Signup"
+            android:text="SignUp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/signup_et_phoneNumber" />

@@ -3,12 +3,12 @@ package com.example.study_lab.login;
 public class LoginFormState {
     private final String idErrorMessage;
     private final String passwordErrorMessage;
-    private final boolean isFieldsValid;
+    private final boolean fieldsValid;
 
     public LoginFormState(String usernameErrorMessage, String passwordErrorMessage, boolean isFieldsValid) {
         this.idErrorMessage = usernameErrorMessage;
         this.passwordErrorMessage = passwordErrorMessage;
-        this.isFieldsValid = isFieldsValid;
+        this.fieldsValid = isFieldsValid;
     }
 
     public String getIdErrorMessage() {
@@ -20,6 +20,6 @@ public class LoginFormState {
     }
 
     public boolean isFieldsValid() {
-        return isFieldsValid;
+        return fieldsValid;
     }
 }

@@ -26,12 +26,14 @@ import java.io.IOException;
 public class DailyChallengeFragment extends Fragment {
     private DailyChallengeViewModel dailyChallengeViewModel;
     private Classifier classifier;
+
     private TouchView touchView;
     private TextView tv_predict;
     private Button btn_clear;
     private Button btn_detect;
     private Button btn_submit;
     private ImageView iv_answer;
+
     private int output;
 
     public DailyChallengeFragment() {
@@ -68,7 +70,7 @@ public class DailyChallengeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        touchView = view.findViewById(R.id.daily_touch_view);
+        touchView = view.findViewById(R.id.daily_touchView);
         tv_predict = view.findViewById(R.id.daily_tv_predict);
         btn_clear = view.findViewById(R.id.daily_btn_clear);
         btn_detect = view.findViewById(R.id.daily_btn_detect);

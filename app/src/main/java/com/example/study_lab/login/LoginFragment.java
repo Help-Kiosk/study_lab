@@ -66,7 +66,7 @@ public class LoginFragment extends Fragment {
         et_email = view.findViewById(R.id.login_et_email);
         et_password = view.findViewById(R.id.login_et_password);
         bt_login = view.findViewById(R.id.login_bt_login);
-        bt_signup = view.findViewById(R.id.login_bt_signup);
+        bt_signup = view.findViewById(R.id.login_bt_signUp);
 
         //region observer
         loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new Observer<LoginFormState>() {

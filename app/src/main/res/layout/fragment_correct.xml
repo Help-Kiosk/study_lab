@@ -7,17 +7,17 @@
     tools:context=".dailychallenge.CorrectFragment">
 
     <TextView
-        android:id="@+id/wrong_tv_text2"
+        android:id="@+id/correct_tv_text"
         android:layout_width="175dp"
         android:layout_height="54dp"
         android:text="맞았습니다!"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView3"
+        app:layout_constraintBottom_toTopOf="@+id/correct_iv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/correct_iv"
         android:layout_width="257dp"
         android:layout_height="505dp"
         android:layout_marginBottom="16dp"

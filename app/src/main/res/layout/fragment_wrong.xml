@@ -7,7 +7,7 @@
     tools:context=".dailychallenge.WrongFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/wrong_iv"
         android:layout_width="251dp"
         android:layout_height="510dp"
         android:layout_marginBottom="16dp"
@@ -22,7 +22,7 @@
         android:layout_height="54dp"
         android:text="틀렸습니다!"
         android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/wrong_iv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

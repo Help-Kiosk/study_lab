@@ -4,15 +4,16 @@ public class SignupFormState {
     private final String idErrorMessage;
     private final String passwordErrorMessage;
     private final String passwordCheckErrorMessage;
-    private final String displayNameErrorMessage;
-    private final boolean isFieldsValid;
+    private final String nameErrorMessage;
+    private final boolean fieldsValid;
 
-    public SignupFormState(String usernameErrorMessage, String passwordErrorMessage, String passwordCheckErrorMessage, String displayNameErrorMessage, boolean isFieldsValid) {
+    public SignupFormState(String usernameErrorMessage, String passwordErrorMessage, String passwordCheckErrorMessage,
+                           String displayNameErrorMessage, boolean isFieldsValid) {
         this.idErrorMessage = usernameErrorMessage;
         this.passwordErrorMessage = passwordErrorMessage;
         this.passwordCheckErrorMessage = passwordCheckErrorMessage;
-        this.displayNameErrorMessage = displayNameErrorMessage;
-        this.isFieldsValid = isFieldsValid;
+        this.nameErrorMessage = displayNameErrorMessage;
+        this.fieldsValid = isFieldsValid;
     }
 
     public String getIdErrorMessage() {
@@ -27,11 +28,11 @@ public class SignupFormState {
         return passwordCheckErrorMessage;
     }
 
-    public String getDisplayNameErrorMessage() {
-        return displayNameErrorMessage;
+    public String getNameErrorMessage() {
+        return nameErrorMessage;
     }
 
     public boolean isFieldsValid() {
-        return isFieldsValid;
+        return fieldsValid;
     }
 }

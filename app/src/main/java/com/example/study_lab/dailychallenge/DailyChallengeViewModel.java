@@ -22,6 +22,7 @@ import java.util.concurrent.Executor;
 
 public class DailyChallengeViewModel extends ViewModel {
     private UserRepository userRepository = UserRepository.getInstance();
+
     private MutableLiveData<Integer> dataLoaded = new MutableLiveData<>();
     private MutableLiveData<Boolean> uriLoaded = new MutableLiveData<>();
     private Drawable answerImage;

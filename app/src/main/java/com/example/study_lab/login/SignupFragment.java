@@ -55,9 +55,9 @@ public class SignupFragment extends Fragment {
         et_email = view.findViewById(R.id.signup_et_email);
         et_password = view.findViewById(R.id.signup_et_password);
         et_passwordCheck = view.findViewById(R.id.signup_et_passwordCheck);
-        et_displayName = view.findViewById(R.id.signup_et_displayName);
+        et_displayName = view.findViewById(R.id.signup_et_name);
         et_phoneNum = view.findViewById(R.id.signup_et_phoneNumber);
-        bt_signup = view.findViewById(R.id.signup_bt_signup);
+        bt_signup = view.findViewById(R.id.signup_bt_signUp);
 
         loginViewModel.getAllUsersId();
 
@@ -74,8 +74,8 @@ public class SignupFragment extends Fragment {
                 if (SignupFormState.getPasswordCheckErrorMessage() != null) {
                     et_passwordCheck.setError(SignupFormState.getPasswordCheckErrorMessage());
                 }
-                if (SignupFormState.getDisplayNameErrorMessage() != null) {
-                    et_displayName.setError(SignupFormState.getDisplayNameErrorMessage());
+                if (SignupFormState.getNameErrorMessage() != null) {
+                    et_displayName.setError(SignupFormState.getNameErrorMessage());
                 }
                 bt_signup.setEnabled(SignupFormState.isFieldsValid());
             }
@@ -169,8 +169,8 @@ public class SignupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (loginViewModel.checkId(et_email.getText().toString())) {
-                    user = new User(et_displayName.getText().toString(),et_email.getText().toString(),et_password.getText().toString(),et_phoneNum.getText().toString(),"false");
-                    loginViewModel.tryRegister(et_email.getText().toString(), et_password.getText().toString(), et_displayName.getText().toString(),et_phoneNum.getText().toString(),"false");
+                    user = new User(et_displayName.getText().toString(), et_email.getText().toString(), et_password.getText().toString(), et_phoneNum.getText().toString(), "false");
+                    loginViewModel.tryRegister(et_email.getText().toString(), et_password.getText().toString(), et_displayName.getText().toString(), et_phoneNum.getText().toString(), "false");
                 } else {
                     Toast.makeText(requireContext(), "Email already exists", Toast.LENGTH_SHORT).show();
                     et_email.setText("");

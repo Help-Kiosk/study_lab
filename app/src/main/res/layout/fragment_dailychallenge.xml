@@ -27,11 +27,11 @@
         android:text="--"
         android:textColor="@android:color/black"
         android:textSize="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/daily_touch_view"
+        app:layout_constraintBottom_toTopOf="@+id/daily_touchView"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.example.study_lab.dailychallenge.TouchView
-        android:id="@+id/daily_touch_view"
+        android:id="@+id/daily_touchView"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center"

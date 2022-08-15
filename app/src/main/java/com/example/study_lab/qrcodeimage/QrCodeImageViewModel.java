@@ -14,8 +14,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 public class QrCodeImageViewModel extends ViewModel {
     private UserRepository userRepository = UserRepository.getInstance();
+
     private MutableLiveData<Boolean> qrImageLoaded = new MutableLiveData<>(false);
-    private MutableLiveData<Boolean> isQrLoaded = new MutableLiveData<>(false);
+    private MutableLiveData<Boolean> qrLoaded = new MutableLiveData<>(false);
+
     private Drawable qrCodeImage;
     private User currUser;
 
@@ -36,9 +38,9 @@ public class QrCodeImageViewModel extends ViewModel {
         userRepository.getUserCheckInState(id);
     }
 
-    public void changeCheckInState(String id){
+    public void changeCheckInState(String id) {
         userRepository.changeCheckInState(id, result -> {
-            if (result instanceof Result.Error){
+            if (result instanceof Result.Error) {
                 Log.d("DEBUG", "changeCheckInState: fail to change checkIn state");
             }
         });

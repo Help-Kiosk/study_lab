@@ -14,7 +14,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_correct.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_daily_challenge.xml" value="0.297469482421875" />
-        <entry key="app/src/main/res/layout/fragment_dailychallenge.xml" value="0.29438405797101447" />
+        <entry key="app/src/main/res/layout/fragment_dailychallenge.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.32708333333333334" />
         <entry key="app/src/main/res/layout/fragment_mnist.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/layout/fragment_qrcodeimage.xml" value="0.2994791666666667" />
