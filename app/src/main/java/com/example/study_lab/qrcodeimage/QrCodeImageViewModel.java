@@ -1,6 +1,7 @@
 package com.example.study_lab.qrcodeimage;
 
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,37 +10,46 @@ import androidx.lifecycle.ViewModel;
 import com.example.study_lab.UserRepository;
 import com.example.study_lab.model.Result;
 import com.example.study_lab.model.User;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 public class QrCodeImageViewModel extends ViewModel {
     private UserRepository userRepository = UserRepository.getInstance();
+    private MutableLiveData<Boolean> qrImageLoaded = new MutableLiveData<>(false);
     private MutableLiveData<Boolean> isQrLoaded = new MutableLiveData<>(false);
     private Drawable qrCodeImage;
-
     private User currUser;
 
-    public void setUser(String userId) {
-        currUser = userRepository.getUser(userId);
-        userRepository.loadQrDrawableForUser(userId, new UserRepository.UserRepositoryCallback<Result<Drawable>>() {
+    public void setUser(String id) {
+        currUser = userRepository.getUser(id);
+        userRepository.loadQrDrawableForUser(id, new UserRepository.UserRepositoryCallback<Result<Drawable>>() {
             @Override
             public void onComplete(Result<Drawable> drawableResult) {
                 if (drawableResult instanceof Result.Success) {
                     qrCodeImage = ((Result.Success<Drawable>) drawableResult).getData();
-                    isQrLoaded.postValue(true);
-                } else {
-                    //오류 보여주기
+                    qrImageLoaded.postValue(true);
                 }
             }
         });
     }
 
-    public void getUserCheckInState(String userId){
-        userRepository.getUserCheckInState(userId);
+    public void getUserCheckInState(String id) {
+        userRepository.getUserCheckInState(id);
     }
 
-    public LiveData<Boolean> isCheckInUserState(){return userRepository.userCheckInState();}
+    public void changeCheckInState(String id){
+        userRepository.changeCheckInState(id, result -> {
+            if (result instanceof Result.Error){
+                Log.d("DEBUG", "changeCheckInState: fail to change checkIn state");
+            }
+        });
+    }
+
+    public LiveData<Boolean> isUserCheckedIn() {
+        return userRepository.isUserCheckedIn();
+    }
 
     public LiveData<Boolean> isQrImageLoaded() {
-        return isQrLoaded;
+        return qrImageLoaded;
     }
 
     public Drawable getQrCodeImage() {

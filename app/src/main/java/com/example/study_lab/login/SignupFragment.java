@@ -56,11 +56,10 @@ public class SignupFragment extends Fragment {
         et_password = view.findViewById(R.id.signup_et_password);
         et_passwordCheck = view.findViewById(R.id.signup_et_passwordCheck);
         et_displayName = view.findViewById(R.id.signup_et_displayName);
-        et_phoneNum = view.findViewById(R.id.signup_et_phonenum);
+        et_phoneNum = view.findViewById(R.id.signup_et_phoneNumber);
         bt_signup = view.findViewById(R.id.signup_bt_signup);
 
-
-        loginViewModel.getId();
+        loginViewModel.getAllUsersId();
 
         //region Observer
         loginViewModel.getSignupFormState().observe(getViewLifecycleOwner(), new Observer<SignupFormState>() {
@@ -170,8 +169,8 @@ public class SignupFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 if (loginViewModel.checkId(et_email.getText().toString())) {
-                    user = new User(et_displayName.getText().toString(),et_email.getText().toString(),et_password.getText().toString(),et_phoneNum.getText().toString(),"");
-                    loginViewModel.tryRegister(et_email.getText().toString(), et_password.getText().toString(), et_displayName.getText().toString(),et_phoneNum.getText().toString(),"");
+                    user = new User(et_displayName.getText().toString(),et_email.getText().toString(),et_password.getText().toString(),et_phoneNum.getText().toString(),"false");
+                    loginViewModel.tryRegister(et_email.getText().toString(), et_password.getText().toString(), et_displayName.getText().toString(),et_phoneNum.getText().toString(),"false");
                 } else {
                     Toast.makeText(requireContext(), "Email already exists", Toast.LENGTH_SHORT).show();
                     et_email.setText("");

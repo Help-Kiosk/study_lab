@@ -1,6 +1,5 @@
 package com.example.study_lab.login;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -20,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.study_lab.R;
+
 public class LoginFragment extends Fragment {
     private LoginViewModel loginViewModel;
 
@@ -28,7 +28,7 @@ public class LoginFragment extends Fragment {
     private Button bt_login;
     private Button bt_signup;
 
-    private  long pressedTime = 0;
+    private long pressedTime = 0;
 
     public LoginFragment() {
     }
@@ -41,11 +41,11 @@ public class LoginFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                if(System.currentTimeMillis()>pressedTime+2000){
+                if (System.currentTimeMillis() > pressedTime + 2000) {
                     pressedTime = System.currentTimeMillis();
-                    Toast.makeText(requireContext(),"Press once more to exit",Toast.LENGTH_SHORT).show();
-                }else{
-                    Toast.makeText(requireContext(),"Exit the app",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), "Press once more to exit", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(requireContext(), "Exit the app", Toast.LENGTH_SHORT).show();
                     requireActivity().finish();
                 }
             }
@@ -102,13 +102,25 @@ public class LoginFragment extends Fragment {
         loginViewModel.isLoggedIn().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isLoggedIn) {
-                if (isLoggedIn == true) {
-                    loginViewModel.setUserId(et_email.getText().toString());
+                if (isLoggedIn) {
+                    loginViewModel.setUser(et_email.getText().toString());
+                } else {
+                    Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    et_email.setText(null);
+                    et_password.setText(null);
+                }
+            }
+        });
+
+        loginViewModel.doesUserSetSuccess().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean doseUserSetSuccess) {
+                if (doseUserSetSuccess) {
                     LoginFragmentDirections.ActionLoginFragmentToQrCodeImageFragment action = LoginFragmentDirections.actionLoginFragmentToQrCodeImageFragment();
                     action.setUserId(et_email.getText().toString());
                     NavHostFragment.findNavController(LoginFragment.this).navigate(action);
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "fail to set", Toast.LENGTH_SHORT).show();
                     et_email.setText(null);
                     et_password.setText(null);
                 }

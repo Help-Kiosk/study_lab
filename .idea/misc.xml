@@ -17,6 +17,7 @@
         <entry key="app/src/main/res/layout/fragment_mnist.xml" value="0.3692708333333333" />
         <entry key="app/src/main/res/layout/fragment_qrcodeimage.xml" value="0.2994791666666667" />
         <entry key="app/src/main/res/layout/fragment_qrimage.xml" value="0.5317708333333333" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.2558876811594203" />
         <entry key="app/src/main/res/layout/fragment_wrong.xml" value="0.48854166666666665" />
       </map>
     </option>

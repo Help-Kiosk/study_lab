@@ -1,8 +1,6 @@
 package com.example.study_lab.dailychallenge;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,19 +14,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
 import com.example.study_lab.R;
-import com.google.android.gms.tasks.Task;
 
 import java.io.IOException;
 
@@ -36,11 +27,11 @@ public class DailyChallengeFragment extends Fragment {
     private DailyChallengeViewModel dailyChallengeViewModel;
     private Classifier classifier;
     private TouchView touchView;
-    private TextView predict_text;
+    private TextView tv_predict;
     private Button btn_clear;
     private Button btn_detect;
     private Button btn_submit;
-    private ImageView imageView;
+    private ImageView iv_answer;
     private int output;
 
     public DailyChallengeFragment() {
@@ -77,24 +68,23 @@ public class DailyChallengeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        touchView = view.findViewById(R.id.touch_view);
-        predict_text = view.findViewById(R.id.predict_text);
+        touchView = view.findViewById(R.id.daily_touch_view);
+        tv_predict = view.findViewById(R.id.daily_tv_predict);
         btn_clear = view.findViewById(R.id.daily_btn_clear);
         btn_detect = view.findViewById(R.id.daily_btn_detect);
         btn_submit = view.findViewById(R.id.daily_btn_submit);
-        imageView = view.findViewById(R.id.daily_imageView);
+        iv_answer = view.findViewById(R.id.daily_iv_answer);
 
         btn_detect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (touchView == null){
+                if (touchView == null) {
                     Toast.makeText(requireContext(), "숫자를 입력해주세요.", Toast.LENGTH_SHORT).show();
-                }
-                else {
+                } else {
                     Bitmap image = touchView.exportToBitmap(28, 28);
                     output = classifier.classify(image);
 
-                    predict_text.setText(String.valueOf(output));
+                    tv_predict.setText(String.valueOf(output));
                 }
             }
         });
@@ -103,18 +93,17 @@ public class DailyChallengeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 touchView.clear();
-                predict_text.setText("--");
+                tv_predict.setText("--");
             }
         });
 
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (output<1 || output >6){
+                if (output < 1 || output > 6) {
                     Toast.makeText(requireContext(), "올바른 숫자를 입력해주세요.", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    dailyChallengeViewModel.loadAnswer();
+                } else {
+                    dailyChallengeViewModel.getAnswer();
                 }
             }
         });
@@ -122,10 +111,9 @@ public class DailyChallengeFragment extends Fragment {
         dailyChallengeViewModel.getDataLoaded().observe(getViewLifecycleOwner(), new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
-                if (output==integer){
+                if (output == integer) {
                     NavHostFragment.findNavController(DailyChallengeFragment.this).navigate(R.id.action_dailyChallengeFragment_to_correctFragment);
-                }
-                else {
+                } else {
                     NavHostFragment.findNavController(DailyChallengeFragment.this).navigate(R.id.action_dailyChallengeFragment_to_wrongFragment);
                 }
             }
@@ -133,34 +121,11 @@ public class DailyChallengeFragment extends Fragment {
 
         dailyChallengeViewModel.isUriLoaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
-            public void onChanged(Boolean aBoolean) {
-                Task<Uri> pathUri = dailyChallengeViewModel.getUri();
-
-                Glide.with(requireContext())
-                        .load(pathUri.getResult())
-                        .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)
-                        .into(new SimpleTarget<Drawable>() {
-                            @Override
-                            public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-                                final int imageHeight = resource.getIntrinsicHeight();
-                                final int imageWidth = resource.getIntrinsicWidth();
-
-                                ViewTreeObserver vto = imageView.getViewTreeObserver();
-                                vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                                    @Override
-                                    public void onGlobalLayout() {
-                                        imageView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                                        int width = imageView.getMeasuredWidth();
-                                        int height = (width * imageHeight)/imageWidth;
-
-                                        imageView.setLayoutParams(new LinearLayout.LayoutParams(width, height));
-                                    }
-                                });
-                            }
-                        });
+            public void onChanged(Boolean isLoaded) {
+                if (isLoaded) {
+                    iv_answer.setImageDrawable(dailyChallengeViewModel.getAnswerImage());
+                }
             }
         });
-
     }
-
 }

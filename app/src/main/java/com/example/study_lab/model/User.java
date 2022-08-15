@@ -7,9 +7,9 @@ public class User {
     private String phoneNumber;
     private String checkIn;
 
-    public User(String name, String userId, String password, String phoneNumber,String checkIn) {
+    public User(String name, String id, String password, String phoneNumber, String checkIn) {
         this.name = name;
-        this.userId = userId;
+        this.userId = id;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.checkIn = checkIn;

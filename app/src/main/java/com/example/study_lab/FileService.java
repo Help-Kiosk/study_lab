@@ -124,6 +124,7 @@ public class FileService extends Service {
     public File createImageFile(String destination) {
         return createFile(imageStorageDir, destination);
     }
+
     public void  uploadFileToDatabase(File toSave, String destination, FileServiceCallback<Result<Uri>> callback)
     {
         firebaseDataSource.uploadFile(toSave, destination, new DataSourceCallback<Result<Uri>>(){
