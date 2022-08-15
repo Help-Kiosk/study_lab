@@ -38,6 +38,11 @@ public class QrCodeImageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         qrCodeImageViewModel = new ViewModelProvider(this).get(QrCodeImageViewModel.class);
+
+        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) !=
+                PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.SEND_SMS}, 1);
+        }
     }
 
     @Override
@@ -53,6 +58,7 @@ public class QrCodeImageFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         qrCodeImageViewModel.isQrImageLoaded().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isLoaded) {
@@ -66,12 +72,6 @@ public class QrCodeImageFragment extends Fragment {
             @Override
             public void onChanged(Boolean isUserCheckedIn) {
                 if (isUserCheckedIn) {
-
-                    if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.SEND_SMS) !=
-                            PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(requireActivity(), new String[]{Manifest.permission.SEND_SMS}, 1);
-                    }
-
                     User user = qrCodeImageViewModel.getCurrUser();
                     String msg = user.getName() + " 학생이 등원하였습니다.";
 
