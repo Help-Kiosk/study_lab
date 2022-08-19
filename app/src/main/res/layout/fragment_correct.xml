@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".dailychallenge.CorrectFragment">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/correct_tv_text"
-        android:layout_width="175dp"
-        android:layout_height="54dp"
-        android:text="맞았습니다!"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/correct_iv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".dailychallenge.CorrectFragment">
 
-    <ImageView
-        android:id="@+id/correct_iv"
-        android:layout_width="257dp"
-        android:layout_height="505dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/image_correct"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/correct_tv_text"
+            android:layout_width="175dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="32dp"
+            android:text="맞았습니다!"
+            android:textSize="34sp"
+            app:layout_constraintBottom_toTopOf="@+id/correct_iv"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/correct_iv"
+            android:layout_width="257dp"
+            android:layout_height="505dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/image_correct"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
