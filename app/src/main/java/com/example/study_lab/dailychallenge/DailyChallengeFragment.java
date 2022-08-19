@@ -3,6 +3,7 @@ package com.example.study_lab.dailychallenge;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -35,6 +36,7 @@ public class DailyChallengeFragment extends Fragment {
     private ImageView iv_answer;
 
     private int output;
+    private long pressedTime = 0;
 
     public DailyChallengeFragment() {
     }
@@ -50,6 +52,23 @@ public class DailyChallengeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dailyChallengeViewModel = new ViewModelProvider(this).get(DailyChallengeViewModel.class);
+
+        OnBackPressedCallback callback = new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                //TODO : backButton 안하고 싶으면 없애고, 나가기로 하면 그래도 두면 돼
+                if (System.currentTimeMillis() > pressedTime + 2000) {
+                    pressedTime = System.currentTimeMillis();
+                    Toast.makeText(requireContext(), "Press once more to exit", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(requireContext(), "Exit the app", Toast.LENGTH_SHORT).show();
+                    requireActivity().finish();
+                }
+                //여기까지
+            }
+        };
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
+
         dailyChallengeViewModel.loadQuestion();
 
         try {
