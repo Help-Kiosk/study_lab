@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="틀렸습니다!"
+            android:text="@string/tv_wrong"
             android:textSize="34sp"
             app:layout_constraintBottom_toTopOf="@+id/wrong_iv"
             app:layout_constraintEnd_toEndOf="parent"

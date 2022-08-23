@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.study_lab.R;
 import com.example.study_lab.model.Result;
 import com.example.study_lab.UserRepository;
 import com.example.study_lab.model.User;
@@ -60,7 +61,7 @@ public class LoginViewModel extends ViewModel {
         if (changedId.length() == 0) {
             loginFormState.setValue(new LoginFormState(null, null, false));
         } else if (!isEmailValid(loginIdText)) {
-            loginFormState.setValue(new LoginFormState("Email format is wrong", loginFormState.getValue().getPasswordErrorMessage(), false));
+            loginFormState.setValue(new LoginFormState("이메일 형식이 잘못되었습니다.", loginFormState.getValue().getPasswordErrorMessage(), false));
         } else if (isPasswordValid(loginPasswordText)) {
             loginFormState.setValue(new LoginFormState(null, null, true));
         } else if (loginFormState.getValue().getIdErrorMessage() != null) {
@@ -73,7 +74,7 @@ public class LoginViewModel extends ViewModel {
         if (changedPassword.length() == 0) {
             loginFormState.setValue(new LoginFormState(null, null, false));
         } else if (!isPasswordValid(loginPasswordText)) {
-            loginFormState.setValue(new LoginFormState(loginFormState.getValue().getIdErrorMessage(), "Password is too short", false));
+            loginFormState.setValue(new LoginFormState(loginFormState.getValue().getIdErrorMessage(), "비밀번호가 너무 짧습니다.", false));
         } else if (isEmailValid(loginIdText)) {
             loginFormState.setValue(new LoginFormState(null, null, true));
         } else if (loginFormState.getValue().getPasswordErrorMessage() != null) {
@@ -87,7 +88,7 @@ public class LoginViewModel extends ViewModel {
         if (changedId.length() == 0) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, false));
         } else if (!isEmailValid(idText)) {
-            signupFormState.setValue(new SignupFormState("Email format is wrong", signupFormState.getValue().getPasswordErrorMessage(), signupFormState.getValue().getPasswordCheckErrorMessage(), signupFormState.getValue().getNameErrorMessage(), false));
+            signupFormState.setValue(new SignupFormState("이메일 형식이 잘못되었습니다.", signupFormState.getValue().getPasswordErrorMessage(), signupFormState.getValue().getPasswordCheckErrorMessage(), signupFormState.getValue().getNameErrorMessage(), false));
         } else if (isPasswordValid(passwordText) && isPasswordEqual(passwordText, passwordCheckText) && isNameValid(nameText)) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, true));
         } else if (signupFormState.getValue().getIdErrorMessage() != null) {
@@ -100,7 +101,7 @@ public class LoginViewModel extends ViewModel {
         if (changedPassword.length() == 0) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, false));
         } else if (!isPasswordValid(passwordText)) {
-            signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), "Password is too short", signupFormState.getValue().getPasswordCheckErrorMessage(), signupFormState.getValue().getNameErrorMessage(), false));
+            signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), "비밀번호가 너무 짧습니다.", signupFormState.getValue().getPasswordCheckErrorMessage(), signupFormState.getValue().getNameErrorMessage(), false));
         } else if (isEmailValid(idText) && isPasswordEqual(passwordText, passwordCheckText) && isNameValid(nameText)) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, true));
         } else if (signupFormState.getValue().getPasswordErrorMessage() != null) {
