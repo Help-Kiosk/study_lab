@@ -1,5 +1,22 @@
 <resources>
     <string name="app_name">study_lab</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tv_correct">correct!</string>
+    <string name="tv_email">Email</string>
+    <string name="tv_password">Password</string>
+    <string name="tv_logIn">LogIn</string>
+    <string name="tv_singUp">Signup</string>
+    <string name="tv_drawAnswer">please draw your answer</string>
+    <string name="tv_erase">erase</string>
+    <string name="tv_enterAnswer">enter</string>
+    <string name="tv_submit">submit</string>
+    <string name="tv_comment1">show this screen to teacher</string>
+    <string name="tv_comment2">and slove problem</string>
+    <string name="tv_passwordCheck">PasswordCheck</string>
+    <string name="tv_name">Name</string>
+    <string name="tv_phoneNumber">parents\' phone number</string>
+    <string name="tv_wrong">wrong!</string>
+    <string name="tst_pressOneMoreToExit">Press once more to exit</string>
+    <string name="tst_exitTheApp">Exit the app</string>
+    <string name="tst_logInFailed">Login Failed</string>
+    <string name="tst_passwordIsTooShort">Password is too short</string>
 </resources>

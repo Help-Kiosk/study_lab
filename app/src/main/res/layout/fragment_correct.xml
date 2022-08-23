@@ -15,7 +15,7 @@
             android:layout_width="175dp"
             android:layout_height="54dp"
             android:layout_marginTop="32dp"
-            android:text="맞았습니다!"
+            android:text="@string/tv_correct"
             android:textSize="34sp"
             app:layout_constraintBottom_toTopOf="@+id/correct_iv"
             app:layout_constraintEnd_toEndOf="parent"

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">study_lab</string>
+    <string name="tv_correct">맞았습니다!</string>
+    <string name="tv_email">이메일</string>
+    <string name="tv_drawAnswer">정답을 그려주세요.</string>
+    <string name="tv_erase">지우기</string>
+    <string name="tv_enterAnswer">정답 입력</string>
+    <string name="tv_submit">제출하기</string>
+    <string name="tv_comment1">선생님한테 화면을 보여주고</string>
+    <string name="tv_comment2">자리에 앉아 문제를 푸세요!</string>
+    <string name="tv_wrong">틀렸습니다!</string>
+    <string name="tv_password">비밀번호</string>
+    <string name="tv_logIn">로그인</string>
+    <string name="tv_singUp">회원가입</string>
+    <string name="tv_passwordCheck">비밀번호 확인</string>
+    <string name="tv_name">이름</string>
+    <string name="tv_phoneNumber">부모님의 핸드폰 번호</string>
+    <string name="tst_passwordIsTooShort">비밀번호가 너무 짧습니다.</string>
+    <string name="tst_pressOneMoreToExit">앱을 나가려면 뒤로 한번 더 가세요.</string>
+    <string name="tst_exitTheApp">앱을 나갑니다.</string>
+    <string name="tst_logInFailed">로그인에 실패하였습니다.</string>
+</resources>

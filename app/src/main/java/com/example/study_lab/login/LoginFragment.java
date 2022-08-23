@@ -43,9 +43,9 @@ public class LoginFragment extends Fragment {
             public void handleOnBackPressed() {
                 if (System.currentTimeMillis() > pressedTime + 2000) {
                     pressedTime = System.currentTimeMillis();
-                    Toast.makeText(requireContext(), "Press once more to exit", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.tst_pressOneMoreToExit, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(requireContext(), "Exit the app", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.tst_exitTheApp, Toast.LENGTH_SHORT).show();
                     requireActivity().finish();
                 }
             }
@@ -105,7 +105,7 @@ public class LoginFragment extends Fragment {
                 if (isLoggedIn) {
                     loginViewModel.setUser(et_email.getText().toString());
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.tst_logInFailed, Toast.LENGTH_SHORT).show();
                     et_email.setText(null);
                     et_password.setText(null);
                 }
@@ -120,7 +120,7 @@ public class LoginFragment extends Fragment {
                     action.setUserId(et_email.getText().toString());
                     NavHostFragment.findNavController(LoginFragment.this).navigate(action);
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "fail to set", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), R.string.tst_logInFailed, Toast.LENGTH_SHORT).show();
                     et_email.setText(null);
                     et_password.setText(null);
                 }
