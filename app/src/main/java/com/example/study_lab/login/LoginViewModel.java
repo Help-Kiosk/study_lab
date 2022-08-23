@@ -88,7 +88,7 @@ public class LoginViewModel extends ViewModel {
         if (changedId.length() == 0) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, false));
         } else if (!isEmailValid(idText)) {
-            signupFormState.setValue(new SignupFormState("Email format is wrong", signupFormState.getValue().getPasswordErrorMessage(), signupFormState.getValue().getPasswordCheckErrorMessage(), signupFormState.getValue().getNameErrorMessage(), false));
+            signupFormState.setValue(new SignupFormState("이메일 형식이 잘못되었습니다.", signupFormState.getValue().getPasswordErrorMessage(), signupFormState.getValue().getPasswordCheckErrorMessage(), signupFormState.getValue().getNameErrorMessage(), false));
         } else if (isPasswordValid(passwordText) && isPasswordEqual(passwordText, passwordCheckText) && isNameValid(nameText)) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, true));
         } else if (signupFormState.getValue().getIdErrorMessage() != null) {
@@ -101,7 +101,7 @@ public class LoginViewModel extends ViewModel {
         if (changedPassword.length() == 0) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, false));
         } else if (!isPasswordValid(passwordText)) {
-            signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), "Password is too short", signupFormState.getValue().getPasswordCheckErrorMessage(), signupFormState.getValue().getNameErrorMessage(), false));
+            signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), "비밀번호가 너무 짧습니다.", signupFormState.getValue().getPasswordCheckErrorMessage(), signupFormState.getValue().getNameErrorMessage(), false));
         } else if (isEmailValid(idText) && isPasswordEqual(passwordText, passwordCheckText) && isNameValid(nameText)) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, true));
         } else if (signupFormState.getValue().getPasswordErrorMessage() != null) {
