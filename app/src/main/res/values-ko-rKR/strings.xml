@@ -20,4 +20,11 @@
     <string name="tst_pressOneMoreToExit">앱을 나가려면 뒤로 한번 더 가세요.</string>
     <string name="tst_exitTheApp">앱을 나갑니다.</string>
     <string name="tst_logInFailed">로그인에 실패하였습니다.</string>
+    <string name="tst_failToBuildClassifier">fail to build classifier</string>
+    <string name="tst_drawRightOne">올바른 숫자를 입력해주세요.</string>
+    <string name="tst_drawAnswer">숫자를 입력해주세요.</string>
+    <string name="tst_successMsg">메시지 전송 완료</string>
+    <string name="tst_failMsg">메시지 전송 실패</string>
+    <string name="str_msg">" 학생이 등원하였습니다."</string>
+    <string name="tst_emailAlreadyExists">중복된 이메일입니다.</string>
 </resources>

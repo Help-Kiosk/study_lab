@@ -114,7 +114,7 @@ public class LoginViewModel extends ViewModel {
         if (changedPasswordCheck.length() == 0) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, false));
         } else if (!isPasswordEqual(passwordText, passwordCheckText)) {
-            signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), signupFormState.getValue().getPasswordErrorMessage(), "Password is wrong", signupFormState.getValue().getNameErrorMessage(), false));
+            signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), signupFormState.getValue().getPasswordErrorMessage(), "비밀번호가 잘못되었습니다.", signupFormState.getValue().getNameErrorMessage(), false));
         } else if (isEmailValid(idText) && isPasswordValid(passwordText) && isNameValid(nameText)) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, true));
         } else if (signupFormState.getValue().getPasswordCheckErrorMessage() != null) {
@@ -127,7 +127,7 @@ public class LoginViewModel extends ViewModel {
         if (changedName.length() == 0) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, false));
         } else if (!isNameValid(nameText)) {
-            signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), signupFormState.getValue().getPasswordErrorMessage(), signupFormState.getValue().getPasswordCheckErrorMessage(), "Name is too short", false));
+            signupFormState.setValue(new SignupFormState(signupFormState.getValue().getIdErrorMessage(), signupFormState.getValue().getPasswordErrorMessage(), signupFormState.getValue().getPasswordCheckErrorMessage(), "이름이 너무 짧습니다.", false));
         } else if (isEmailValid(idText) && isPasswordValid(passwordText) && isPasswordEqual(passwordText, passwordCheckText)) {
             signupFormState.setValue(new SignupFormState(null, null, null, null, true));
         } else if (signupFormState.getValue().getNameErrorMessage() != null) {
@@ -163,11 +163,7 @@ public class LoginViewModel extends ViewModel {
     }
 
     public boolean checkId(String id) {
-        if (!userLists.contains(id)) {
-            return true;
-        } else {
-            return false;
-        }
+        return !userLists.contains(id);
     }
 
     public void setUser(String id) {

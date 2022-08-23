@@ -227,5 +227,4 @@ public class FirebaseDataSource implements DataSource {
             }
         });
     }
-
 }
