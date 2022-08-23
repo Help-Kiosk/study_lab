@@ -73,14 +73,14 @@ public class QrCodeImageFragment extends Fragment {
             public void onChanged(Boolean isUserCheckedIn) {
                 if (isUserCheckedIn) {
                     User user = qrCodeImageViewModel.getCurrUser();
-                    String msg = user.getName() + " 학생이 등원하였습니다.";
+                    String msg = user.getName() + getString(R.string.str_msg);
 
                     try {
                         SmsManager smsManager = SmsManager.getDefault();
                         smsManager.sendTextMessage(user.getPhoneNumber(), null, msg, null, null);
-                        Toast.makeText(getActivity().getApplicationContext(), "메시지 전송 완료", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.tst_successMsg, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
-                        Toast.makeText(getActivity().getApplicationContext(), "메시지 전송 실패", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), R.string.tst_failMsg, Toast.LENGTH_SHORT).show();
                         Log.d("DEBUG", "onChanged: ");
                     }
 

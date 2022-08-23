@@ -68,7 +68,6 @@ public class LoginFragment extends Fragment {
         bt_login = view.findViewById(R.id.login_bt_login);
         bt_signup = view.findViewById(R.id.login_bt_signUp);
 
-        //region observer
         loginViewModel.getLoginFormState().observe(getViewLifecycleOwner(), new Observer<LoginFormState>() {
             @Override
             public void onChanged(LoginFormState loginFormState) {
@@ -85,7 +84,7 @@ public class LoginFragment extends Fragment {
         loginViewModel.getDoingWork().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean isWorking) {
-                if (isWorking == true) {
+                if (isWorking) {
                     et_email.setEnabled(false);
                     et_password.setEnabled(false);
                     bt_login.setEnabled(false);
@@ -126,9 +125,7 @@ public class LoginFragment extends Fragment {
                 }
             }
         });
-        //endregion
 
-        //region Listener
         et_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -176,7 +173,5 @@ public class LoginFragment extends Fragment {
                 NavHostFragment.findNavController(LoginFragment.this).navigate(R.id.action_loginFragment_to_signupFragment);
             }
         });
-        //endregion
-
     }
 }

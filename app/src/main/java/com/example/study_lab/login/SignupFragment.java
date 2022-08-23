@@ -61,7 +61,6 @@ public class SignupFragment extends Fragment {
 
         loginViewModel.getAllUsersId();
 
-        //region Observer
         loginViewModel.getSignupFormState().observe(getViewLifecycleOwner(), new Observer<SignupFormState>() {
             @Override
             public void onChanged(SignupFormState SignupFormState) {
@@ -88,15 +87,13 @@ public class SignupFragment extends Fragment {
                     loginViewModel.createQrForUser(user);
                     NavHostFragment.findNavController(SignupFragment.this).navigate(R.id.action_signupFragment_to_loginFragment);
                 } else {
-                    Toast.makeText(requireContext(), "fail", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.tst_logInFailed, Toast.LENGTH_SHORT).show();
                     et_email.setText("");
                     et_password.setText("");
                 }
             }
         });
-        //endregion
 
-        //region Listener
         et_email.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -172,13 +169,12 @@ public class SignupFragment extends Fragment {
                     user = new User(et_displayName.getText().toString(), et_email.getText().toString(), et_password.getText().toString(), et_phoneNum.getText().toString(), "false");
                     loginViewModel.tryRegister(et_email.getText().toString(), et_password.getText().toString(), et_displayName.getText().toString(), et_phoneNum.getText().toString(), "false");
                 } else {
-                    Toast.makeText(requireContext(), "Email already exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.tst_emailAlreadyExists, Toast.LENGTH_SHORT).show();
                     et_email.setText("");
                 }
 
             }
         });
-        //endregion
 
 
     }

@@ -10,7 +10,7 @@
     <string name="tv_enterAnswer">enter</string>
     <string name="tv_submit">submit</string>
     <string name="tv_comment1">show this screen to teacher</string>
-    <string name="tv_comment2">and slove problem</string>
+    <string name="tv_comment2">and solve problem</string>
     <string name="tv_passwordCheck">PasswordCheck</string>
     <string name="tv_name">Name</string>
     <string name="tv_phoneNumber">parents\' phone number</string>
@@ -19,4 +19,11 @@
     <string name="tst_exitTheApp">Exit the app</string>
     <string name="tst_logInFailed">Login Failed</string>
     <string name="tst_passwordIsTooShort">Password is too short</string>
+    <string name="tst_failToBuildClassifier">fail to build classifier</string>
+    <string name="tst_drawAnswer">please draw answer</string>
+    <string name="tst_drawRightOne">please draw right number</string>
+    <string name="tst_successMsg">success to send message</string>
+    <string name="tst_failMsg">fail to send message</string>
+    <string name="str_msg"> enrolled</string>
+    <string name="tst_emailAlreadyExists">Email already exists</string>
 </resources>

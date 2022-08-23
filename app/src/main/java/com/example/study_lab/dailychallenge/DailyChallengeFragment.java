@@ -56,15 +56,13 @@ public class DailyChallengeFragment extends Fragment {
         OnBackPressedCallback callback = new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                //TODO : backButton 안하고 싶으면 없애고, 나가기로 하면 그래도 두면 돼
                 if (System.currentTimeMillis() > pressedTime + 2000) {
                     pressedTime = System.currentTimeMillis();
-                    Toast.makeText(requireContext(), "Press once more to exit", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.tst_pressOneMoreToExit, Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(requireContext(), "Exit the app", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.tst_exitTheApp, Toast.LENGTH_SHORT).show();
                     requireActivity().finish();
                 }
-                //여기까지
             }
         };
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
@@ -74,7 +72,7 @@ public class DailyChallengeFragment extends Fragment {
         try {
             classifier = new Classifier(requireActivity());
         } catch (IOException e) {
-            Toast.makeText(requireContext(), "fail to build classifier", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.tst_failToBuildClassifier, Toast.LENGTH_SHORT).show();
             Log.e("MnistFragment", "init(): Failed to create Classifier", e);
         }
     }
@@ -100,7 +98,7 @@ public class DailyChallengeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (touchView == null) {
-                    Toast.makeText(requireContext(), "숫자를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.tst_drawAnswer, Toast.LENGTH_SHORT).show();
                 } else {
                     Bitmap image = touchView.exportToBitmap(28, 28);
                     output = classifier.classify(image);
@@ -122,7 +120,7 @@ public class DailyChallengeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (output < 1 || output > 6) {
-                    Toast.makeText(requireContext(), "올바른 숫자를 입력해주세요.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(requireContext(), R.string.tst_drawRightOne, Toast.LENGTH_SHORT).show();
                 } else {
                     dailyChallengeViewModel.getAnswer();
                 }
