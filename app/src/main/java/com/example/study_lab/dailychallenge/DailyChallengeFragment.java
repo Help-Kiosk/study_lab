@@ -33,7 +33,7 @@ public class DailyChallengeFragment extends Fragment {
     private Button btn_clear;
     private Button btn_detect;
     private Button btn_submit;
-    private ImageView iv_answer;
+    private ImageView iv_question;
 
     private int output;
     private long pressedTime = 0;
@@ -92,7 +92,7 @@ public class DailyChallengeFragment extends Fragment {
         btn_clear = view.findViewById(R.id.daily_btn_clear);
         btn_detect = view.findViewById(R.id.daily_btn_detect);
         btn_submit = view.findViewById(R.id.daily_btn_submit);
-        iv_answer = view.findViewById(R.id.daily_iv_answer);
+        iv_question = view.findViewById(R.id.daily_iv_answer);
 
         btn_detect.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +142,7 @@ public class DailyChallengeFragment extends Fragment {
             @Override
             public void onChanged(Boolean isLoaded) {
                 if (isLoaded) {
-                    iv_answer.setImageDrawable(dailyChallengeViewModel.getAnswerImage());
+                    iv_question.setImageDrawable(dailyChallengeViewModel.getQuestionImage());
                 }
             }
         });
