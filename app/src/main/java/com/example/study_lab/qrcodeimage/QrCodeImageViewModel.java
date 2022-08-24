@@ -16,7 +16,6 @@ public class QrCodeImageViewModel extends ViewModel {
     private UserRepository userRepository = UserRepository.getInstance();
 
     private MutableLiveData<Boolean> qrImageLoaded = new MutableLiveData<>(false);
-    private MutableLiveData<Boolean> qrLoaded = new MutableLiveData<>(false);
 
     private Drawable qrCodeImage;
     private User currUser;
